@@ -1,0 +1,127 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Soundcharts
+providerId: soundcharts
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Music
+- Analytics
+- Market Intelligence
+- Metadata
+- Streaming
+- Charts
+- Plans
+description: >-
+  Soundcharts offers self-served, commitment-free monthly API subscriptions
+  tiered by included monthly request volume, plus custom enterprise data feed
+  and data dump solutions sold direct. A free trial provides a small number of
+  requests to evaluate the API. Tier names and prices below are sales-led
+  figures gathered from public pricing pages and are not reconciled against a
+  contract; verify current pricing with Soundcharts.
+notes: >-
+  Soundcharts publishes that API subscriptions range from roughly 500,000 to
+  60M+ requests per month with a shared rate limit and direct-sales pricing.
+  Plan names, request volumes, and dollar figures here are indicative and
+  subject to change; reconciled is false until confirmed with the provider.
+sources:
+- https://developers.soundcharts.com/pricing
+- https://help.soundcharts.com/en/articles/10104294-what-are-the-api-subscription-levels
+- https://help.soundcharts.com/en/articles/10091349-how-can-i-get-access-to-soundcharts-api
+plans:
+- id: soundcharts-free-trial
+  name: Free Trial
+  type: free
+  description: >-
+    A small free request allowance to evaluate the API and generate
+    credentials, with no credit card required.
+  entries:
+  - label: Trial Requests
+    name: trial_requests
+    type: free
+    metric: requests
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Full API Surface (sandbox/limited data)
+- id: soundcharts-developer
+  name: Developer
+  type: usage
+  description: >-
+    Entry self-served API subscription with a monthly request allowance,
+    billed monthly via credit card and cancelable at any time.
+  entries:
+  - label: Included Requests
+    name: developer_requests
+    type: usage
+    metric: requests
+    limit: 500000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: from $250/month (verify)
+    userMultiplied: false
+  elements:
+  - name: Artists
+  - name: Songs
+  - name: Albums
+  - name: Playlists
+  - name: Charts
+  - name: Streaming and Social Metrics
+  - name: Radio
+- id: soundcharts-growth
+  name: Growth
+  type: usage
+  description: >-
+    Higher-volume self-served API subscription for production workloads
+    needing several million requests per month.
+  entries:
+  - label: Included Requests
+    name: growth_requests
+    type: usage
+    metric: requests
+    limit: 10000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: sales-led tier (verify)
+    userMultiplied: false
+  elements:
+  - name: Artists
+  - name: Songs
+  - name: Albums
+  - name: Playlists
+  - name: Charts
+  - name: Streaming and Social Metrics
+  - name: Radio
+- id: soundcharts-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Highest-volume API subscriptions (up to 60M+ requests/month) plus custom
+    incremental data feeds and data dumps to remote storage in customized
+    formats. Negotiated terms; contact Soundcharts sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: High-Volume API Access
+  - name: Data Feed
+  - name: Data Dump
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

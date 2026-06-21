@@ -1,0 +1,544 @@
+{
+  "info": {
+    "name": "Soundcharts API",
+    "description": "REST API for the Soundcharts music-market intelligence platform. Authenticated with x-app-id and x-api-key headers. Base URL https://customer.api.soundcharts.com.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-app-id", "type": "string" },
+      { "key": "value", "value": "{{appId}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://customer.api.soundcharts.com", "type": "string" },
+    { "key": "appId", "value": "", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Artist",
+      "item": [
+        {
+          "name": "Get artist metadata",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve standardized artist metadata by UUID."
+          }
+        },
+        {
+          "name": "Get artist by platform identifier",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/by-platform/:platform/:identifier",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", "by-platform", ":platform", ":identifier"],
+              "variable": [
+                { "key": "platform", "value": "" },
+                { "key": "identifier", "value": "" }
+              ]
+            },
+            "description": "Resolve a Soundcharts artist UUID from a platform identifier."
+          }
+        },
+        {
+          "name": "Get artist songs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/songs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "songs"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "List the songs associated with an artist."
+          }
+        },
+        {
+          "name": "Get artist albums",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/albums",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "albums"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "List the albums associated with an artist."
+          }
+        },
+        {
+          "name": "Get similar artists",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/related",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "related"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "List artists similar to the given artist."
+          }
+        },
+        {
+          "name": "Get artist current stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/current/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "current", "stats"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve the latest aggregated audience and streaming stats for an artist."
+          }
+        },
+        {
+          "name": "Get Soundcharts score",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/soundcharts/score",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "soundcharts", "score"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve the Soundcharts score time series for an artist."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Song",
+      "item": [
+        {
+          "name": "Get song metadata",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/song/:uuid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "song", ":uuid"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve standardized song metadata by UUID."
+          }
+        },
+        {
+          "name": "Get song by ISRC",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/song/by-isrc/:isrc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "song", "by-isrc", ":isrc"],
+              "variable": [{ "key": "isrc", "value": "" }]
+            },
+            "description": "Resolve a song by its ISRC code."
+          }
+        },
+        {
+          "name": "Get song by platform identifier",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/song/by-platform/:platform/:identifier",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "song", "by-platform", ":platform", ":identifier"],
+              "variable": [
+                { "key": "platform", "value": "" },
+                { "key": "identifier", "value": "" }
+              ]
+            },
+            "description": "Resolve a song by a platform identifier."
+          }
+        },
+        {
+          "name": "Get song audio features",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/song/:uuid/audio-features",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "song", ":uuid", "audio-features"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve audio features for a song."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Album",
+      "item": [
+        {
+          "name": "Get album metadata",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/album/by-uuid/:uuid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "album", "by-uuid", ":uuid"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve standardized album metadata by UUID."
+          }
+        },
+        {
+          "name": "Get album by UPC",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/album/by-upc/:upc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "album", "by-upc", ":upc"],
+              "variable": [{ "key": "upc", "value": "" }]
+            },
+            "description": "Resolve an album by its UPC code."
+          }
+        },
+        {
+          "name": "Get album tracklisting",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2.26/album/:uuid/tracks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2.26", "album", ":uuid", "tracks"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "List the tracks contained in an album."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Playlist",
+      "item": [
+        {
+          "name": "Get playlist metadata",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/playlist/:uuid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "playlist", ":uuid"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve standardized playlist metadata by UUID."
+          }
+        },
+        {
+          "name": "Get playlist tracklisting",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/playlist/:uuid/tracks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "playlist", ":uuid", "tracks"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve the current tracklisting for a playlist."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chart",
+      "item": [
+        {
+          "name": "Get song charts by platform",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/chart/song/by-platform/:platform",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "chart", "song", "by-platform", ":platform"],
+              "variable": [{ "key": "platform", "value": "" }]
+            },
+            "description": "List the available song charts for a platform."
+          }
+        },
+        {
+          "name": "Get latest song ranking",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/chart/song/:slug/ranking/latest",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "chart", "song", ":slug", "ranking", "latest"],
+              "variable": [{ "key": "slug", "value": "" }]
+            },
+            "description": "Retrieve the latest ranking for a song chart."
+          }
+        },
+        {
+          "name": "Get latest album ranking",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/chart/album/:slug/ranking/latest",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "chart", "album", ":slug", "ranking", "latest"],
+              "variable": [{ "key": "slug", "value": "" }]
+            },
+            "description": "Retrieve the latest ranking for an album chart."
+          }
+        },
+        {
+          "name": "Get latest TikTok weekly music ranking",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/chart/tiktok/music/weekly/ranking/latest",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "chart", "tiktok", "music", "weekly", "ranking", "latest"]
+            },
+            "description": "Retrieve the latest TikTok weekly music ranking."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metrics",
+      "item": [
+        {
+          "name": "Get artist audience",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/audience/:platform",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "audience", ":platform"],
+              "variable": [
+                { "key": "uuid", "value": "" },
+                { "key": "platform", "value": "" }
+              ]
+            },
+            "description": "Retrieve the follower/audience time series for an artist on a platform."
+          }
+        },
+        {
+          "name": "Get artist streaming audience",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/streaming/:platform/listening",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "streaming", ":platform", "listening"],
+              "variable": [
+                { "key": "uuid", "value": "" },
+                { "key": "platform", "value": "" }
+              ]
+            },
+            "description": "Retrieve the streaming listening audience time series for an artist on a platform."
+          }
+        },
+        {
+          "name": "Get artist popularity",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/popularity/:platform",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "popularity", ":platform"],
+              "variable": [
+                { "key": "uuid", "value": "" },
+                { "key": "platform", "value": "" }
+              ]
+            },
+            "description": "Retrieve the popularity index time series for an artist on a platform."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Radio",
+      "item": [
+        {
+          "name": "Get radio station",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/radio/:uuid",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "radio", ":uuid"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "Retrieve radio station metadata by UUID."
+          }
+        },
+        {
+          "name": "Get artist radio spins",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/artist/:uuid/broadcasts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "artist", ":uuid", "broadcasts"],
+              "variable": [{ "key": "uuid", "value": "" }]
+            },
+            "description": "List radio airplay spins (broadcasts) for an artist."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search the catalog",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"artist\",\n  \"term\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "search"]
+            },
+            "description": "Search for artists, songs, albums, playlists, venues, and festivals by name."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Referential",
+      "item": [
+        {
+          "name": "Get platforms",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-app-id", "value": "{{appId}}" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/referential/platforms",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "referential", "platforms"]
+            },
+            "description": "List the platforms supported by the Soundcharts API."
+          }
+        }
+      ]
+    }
+  ]
+}

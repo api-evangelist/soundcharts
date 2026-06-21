@@ -1,0 +1,60 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Soundcharts
+providerId: soundcharts
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Music
+- Analytics
+- Market Intelligence
+- Metadata
+- Streaming
+- Charts
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Soundcharts API enforces a per-minute request rate limit that is shared
+  across all subscription tiers, on top of a monthly included-request quota
+  that varies by plan. Soundcharts publishes that the rate limit is the same
+  for all plans (on the order of several thousand requests per minute) and
+  that monthly volumes range from roughly 500,000 to 60M+ requests. Specific
+  numeric values are sales-led and not reconciled in this artifact.
+notes: >-
+  Public sources cite a shared per-minute limit across plans and per-month
+  request quotas tied to the subscription tier. Confirm the current RPM limit,
+  per-plan monthly quotas, throttling response codes, and retry guidance with
+  Soundcharts during reconciliation.
+sources:
+- https://help.soundcharts.com/en/articles/10104294-what-are-the-api-subscription-levels
+- https://developers.soundcharts.com/api/v2/doc
+- https://developers.soundcharts.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Minute (RPM)
+  scope: account
+  metric: requests
+  limit: shared across all plans; see provider documentation
+  notes: Soundcharts states the per-minute rate limit is the same for all subscription tiers.
+- name: Monthly Request Quota
+  scope: account
+  metric: requests
+  limit: varies by plan (~500,000 to 60,000,000+ per month)
+  notes: Included monthly request allowance is determined by the subscription tier.
+- name: Free Trial Quota
+  scope: account
+  metric: requests
+  limit: small trial allowance
+  notes: Evaluation requests granted on sign-up with no credit card required.
+policies:
+- name: Tiered Quotas
+  description: Monthly request volume scales with the subscription tier; the per-minute rate limit is shared across tiers.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor any Retry-After header.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

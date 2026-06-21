@@ -1,0 +1,90 @@
+aid: soundcharts
+name: Soundcharts
+review:
+  question: Does Soundcharts expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Soundcharts exposes only a synchronous
+    REST (HTTPS) API. No documented WebSocket or HTTP Server-Sent Events (SSE)
+    streaming surface was found. Real-time delivery for high-volume customers
+    is offered as an out-of-band incremental data feed / data dump to remote
+    storage, which is a batch/file delivery mechanism rather than an in-band
+    streaming API protocol, so it is not modeled as AsyncAPI.
+findings:
+  summary: |
+    Soundcharts does not publish a documented public WebSocket API. The
+    Soundcharts platform exposes a REST (HTTPS) API under
+    https://customer.api.soundcharts.com, authenticated with x-app-id and
+    x-api-key headers (with newer Authorization access tokens also supported).
+    All documented endpoints are request/response GET or POST calls. No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://) endpoint
+    is documented. Continuous data delivery for enterprise customers is offered
+    as a separately negotiated data feed or data dump to remote storage, not as
+    an in-band streaming API.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://customer.api.soundcharts.com
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Soundcharts API reference.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming surface is documented.
+  endpointsConfirmedRest:
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/by-platform/{platform}/{identifier}
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/songs
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/albums
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/related
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/current/stats
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/soundcharts/score
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/audience/{platform}
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/streaming/{platform}/listening
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/popularity/{platform}
+    - GET  https://customer.api.soundcharts.com/api/v2/artist/{uuid}/broadcasts
+    - GET  https://customer.api.soundcharts.com/api/v2/song/{uuid}
+    - GET  https://customer.api.soundcharts.com/api/v2/song/by-isrc/{isrc}
+    - GET  https://customer.api.soundcharts.com/api/v2/song/by-platform/{platform}/{identifier}
+    - GET  https://customer.api.soundcharts.com/api/v2/song/{uuid}/audio-features
+    - GET  https://customer.api.soundcharts.com/api/v2/song/{uuid}/audience/{platform}
+    - GET  https://customer.api.soundcharts.com/api/v2/album/by-uuid/{uuid}
+    - GET  https://customer.api.soundcharts.com/api/v2/album/by-upc/{upc}
+    - GET  https://customer.api.soundcharts.com/api/v2/album/by-platform/{platform}/{identifier}
+    - GET  https://customer.api.soundcharts.com/api/v2.26/album/{uuid}/tracks
+    - GET  https://customer.api.soundcharts.com/api/v2/playlist/{uuid}
+    - GET  https://customer.api.soundcharts.com/api/v2/playlist/by-platform/{platform}/{identifier}
+    - GET  https://customer.api.soundcharts.com/api/v2/playlist/{uuid}/tracks
+    - GET  https://customer.api.soundcharts.com/api/v2/chart/song/by-platform/{platform}
+    - GET  https://customer.api.soundcharts.com/api/v2/chart/song/{slug}/ranking/latest
+    - GET  https://customer.api.soundcharts.com/api/v2/chart/song/{slug}/ranking/{datetime}
+    - GET  https://customer.api.soundcharts.com/api/v2/chart/album/{slug}/ranking/latest
+    - GET  https://customer.api.soundcharts.com/api/v2/chart/tiktok/music/weekly/ranking/latest
+    - GET  https://customer.api.soundcharts.com/api/v2/radio/{uuid}
+    - GET  https://customer.api.soundcharts.com/api/v2/radio/by-slug/{slug}
+    - POST https://customer.api.soundcharts.com/api/v2/search
+    - GET  https://customer.api.soundcharts.com/api/v2/referential/platforms
+sources:
+  - url: https://developers.soundcharts.com/api/v2/doc
+    type: APIReference
+    note: Lists REST base URL https://customer.api.soundcharts.com; all endpoints are HTTPS GET/POST. No WebSocket mentioned.
+  - url: https://developers.soundcharts.com/api/getting-started
+    type: Documentation
+    note: Documents x-app-id / x-api-key headers (legacy) and Authorization access tokens; no streaming protocol described.
+  - url: https://help.soundcharts.com/en/articles/10104294-what-are-the-api-subscription-levels
+    type: Documentation
+    note: Describes request-based subscription tiers and a shared per-minute rate limit; mentions data feeds/dumps as a separate enterprise option.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists in the documented Soundcharts
+    API. The API is REST-only, so no AsyncAPI document was authored. The
+    apis.yml catalog reflects the seven REST API products with OpenAPI,
+    Postman, and Open Collection artifacts.
