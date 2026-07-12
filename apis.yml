@@ -177,6 +177,10 @@ apis:
   description: Resolve radio stations by UUID or slug and retrieve artist radio spins
     and spin counts for airplay tracking.
 common:
+- type: DomainSecurity
+  url: security/soundcharts-domain-security.yml
+- type: Authentication
+  url: authentication/soundcharts-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/soundcharts
 - type: LinkedIn

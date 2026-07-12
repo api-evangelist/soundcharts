@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/soundcharts-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: AppId
+  type: apiKey
+  in: header
+  parameter: x-app-id
+  description: Soundcharts application identifier.
+  sources:
+  - openapi/soundcharts-openapi.yml
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: Soundcharts API key.
+  sources:
+  - openapi/soundcharts-openapi.yml
