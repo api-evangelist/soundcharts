@@ -177,6 +177,8 @@ apis:
   description: Resolve radio stations by UUID or slug and retrieve artist radio spins
     and spin counts for airplay tracking.
 common:
+- type: AgenticAccess
+  url: agentic-access/soundcharts-agentic-access.yml
 - type: DomainSecurity
   url: security/soundcharts-domain-security.yml
 - type: Authentication
