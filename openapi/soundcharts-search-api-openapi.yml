@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: Soundcharts Album Search API
+  description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
+  termsOfService: https://soundcharts.com/en/terms
+  contact:
+    name: Soundcharts API Support
+    url: https://developers.soundcharts.com/api/v2/doc
+  version: '2.0'
+servers:
+- url: https://customer.api.soundcharts.com
+security:
+- AppId: []
+  ApiKey: []
+tags:
+- name: Search
+paths:
+  /api/v2/search:
+    post:
+      operationId: search
+      tags:
+      - Search
+      summary: Search the catalog
+      description: Search for artists, songs, albums, playlists, venues, and festivals by name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericListResponse'
+components:
+  schemas:
+    SearchRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Entity type to search (artist, song, album, playlist).
+        term:
+          type: string
+          description: Search term.
+      required:
+      - type
+      - term
+    GenericListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+  securitySchemes:
+    AppId:
+      type: apiKey
+      in: header
+      name: x-app-id
+      description: Soundcharts application identifier.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Soundcharts API key.

@@ -1,0 +1,296 @@
+openapi: 3.0.1
+info:
+  title: Soundcharts Album Chart API
+  description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
+  termsOfService: https://soundcharts.com/en/terms
+  contact:
+    name: Soundcharts API Support
+    url: https://developers.soundcharts.com/api/v2/doc
+  version: '2.0'
+servers:
+- url: https://customer.api.soundcharts.com
+security:
+- AppId: []
+  ApiKey: []
+tags:
+- name: Chart
+paths:
+  /api/v2/chart/song/by-platform/{platform}:
+    get:
+      operationId: getSongChartsByPlatform
+      tags:
+      - Chart
+      summary: Get song charts by platform
+      description: List the available song charts for a platform.
+      parameters:
+      - $ref: '#/components/parameters/Platform'
+      responses:
+        '200':
+          description: List of charts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChartListResponse'
+  /api/v2/chart/song/{slug}/ranking/latest:
+    get:
+      operationId: getSongRankingLatest
+      tags:
+      - Chart
+      summary: Get latest song ranking
+      description: Retrieve the latest ranking for a song chart.
+      parameters:
+      - $ref: '#/components/parameters/Slug'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Chart ranking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RankingResponse'
+  /api/v2/chart/song/{slug}/ranking/{datetime}:
+    get:
+      operationId: getSongRankingForDate
+      tags:
+      - Chart
+      summary: Get song ranking for a date
+      description: Retrieve a song chart ranking for a specific date.
+      parameters:
+      - $ref: '#/components/parameters/Slug'
+      - name: datetime
+        in: path
+        required: true
+        description: Ranking date in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Chart ranking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RankingResponse'
+  /api/v2/chart/album/{slug}/ranking/latest:
+    get:
+      operationId: getAlbumRankingLatest
+      tags:
+      - Chart
+      summary: Get latest album ranking
+      description: Retrieve the latest ranking for an album chart.
+      parameters:
+      - $ref: '#/components/parameters/Slug'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Chart ranking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RankingResponse'
+  /api/v2/chart/tiktok/music/weekly/ranking/latest:
+    get:
+      operationId: getTiktokMusicRankingLatest
+      tags:
+      - Chart
+      summary: Get latest TikTok weekly music ranking
+      description: Retrieve the latest TikTok weekly music ranking.
+      responses:
+        '200':
+          description: Chart ranking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RankingResponse'
+components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Slug:
+      name: slug
+      in: path
+      required: true
+      description: Chart, radio, or entity slug.
+      schema:
+        type: string
+  schemas:
+    RankingResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RankingEntry'
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+    RankingEntry:
+      type: object
+      properties:
+        position:
+          type: integer
+        oldPosition:
+          type: integer
+          nullable: true
+        timeOnChart:
+          type: integer
+          nullable: true
+        song:
+          $ref: '#/components/schemas/Song'
+    Artist:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        name:
+          type: string
+        appUrl:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        countryCode:
+          type: string
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        biography:
+          type: string
+          nullable: true
+        isni:
+          type: string
+          nullable: true
+        ipi:
+          type: string
+          nullable: true
+        genres:
+          type: array
+          items:
+            type: object
+            properties:
+              root:
+                type: string
+              sub:
+                type: array
+                items:
+                  type: string
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+    Song:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type: object
+          nullable: true
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type: string
+          nullable: true
+        releaseDate:
+          type: string
+          format: date-time
+          nullable: true
+        duration:
+          type: integer
+          nullable: true
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    Chart:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        type:
+          type: string
+        countryCode:
+          type: string
+          nullable: true
+        frequency:
+          type: string
+          nullable: true
+    ChartListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chart'
+  securitySchemes:
+    AppId:
+      type: apiKey
+      in: header
+      name: x-app-id
+      description: Soundcharts application identifier.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Soundcharts API key.

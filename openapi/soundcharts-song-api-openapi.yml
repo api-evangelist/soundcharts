@@ -1,0 +1,233 @@
+openapi: 3.0.1
+info:
+  title: Soundcharts Album Song API
+  description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
+  termsOfService: https://soundcharts.com/en/terms
+  contact:
+    name: Soundcharts API Support
+    url: https://developers.soundcharts.com/api/v2/doc
+  version: '2.0'
+servers:
+- url: https://customer.api.soundcharts.com
+security:
+- AppId: []
+  ApiKey: []
+tags:
+- name: Song
+paths:
+  /api/v2/song/{uuid}:
+    get:
+      operationId: getSongMetadata
+      tags:
+      - Song
+      summary: Get song metadata
+      description: Retrieve standardized song metadata by UUID.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Song metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v2/song/by-isrc/{isrc}:
+    get:
+      operationId: getSongByIsrc
+      tags:
+      - Song
+      summary: Get song by ISRC
+      description: Resolve a song by its ISRC code.
+      parameters:
+      - name: isrc
+        in: path
+        required: true
+        description: International Standard Recording Code.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Song metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v2/song/by-platform/{platform}/{identifier}:
+    get:
+      operationId: getSongByPlatformId
+      tags:
+      - Song
+      summary: Get song by platform identifier
+      description: Resolve a song by a platform identifier.
+      parameters:
+      - $ref: '#/components/parameters/Platform'
+      - $ref: '#/components/parameters/Identifier'
+      responses:
+        '200':
+          description: Song metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongResponse'
+  /api/v2/song/{uuid}/audio-features:
+    get:
+      operationId: getSongAudioFeatures
+      tags:
+      - Song
+      summary: Get song audio features
+      description: Retrieve audio features (tempo, energy, danceability, etc.) for a song.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Audio features
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObjectResponse'
+components:
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    GenericObjectResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
+    Artist:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        name:
+          type: string
+        appUrl:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        countryCode:
+          type: string
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        biography:
+          type: string
+          nullable: true
+        isni:
+          type: string
+          nullable: true
+        ipi:
+          type: string
+          nullable: true
+        genres:
+          type: array
+          items:
+            type: object
+            properties:
+              root:
+                type: string
+              sub:
+                type: array
+                items:
+                  type: string
+    SongResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Song'
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
+    Song:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type: object
+          nullable: true
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type: string
+          nullable: true
+        releaseDate:
+          type: string
+          format: date-time
+          nullable: true
+        duration:
+          type: integer
+          nullable: true
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    AppId:
+      type: apiKey
+      in: header
+      name: x-app-id
+      description: Soundcharts application identifier.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Soundcharts API key.

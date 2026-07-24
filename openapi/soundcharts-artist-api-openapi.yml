@@ -1,0 +1,394 @@
+openapi: 3.0.1
+info:
+  title: Soundcharts Album Artist API
+  description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
+  termsOfService: https://soundcharts.com/en/terms
+  contact:
+    name: Soundcharts API Support
+    url: https://developers.soundcharts.com/api/v2/doc
+  version: '2.0'
+servers:
+- url: https://customer.api.soundcharts.com
+security:
+- AppId: []
+  ApiKey: []
+tags:
+- name: Artist
+paths:
+  /api/v2/artist/{uuid}:
+    get:
+      operationId: getArtistMetadata
+      tags:
+      - Artist
+      summary: Get artist metadata
+      description: Retrieve standardized artist metadata including name, country, genres, ISNI, IPI, biography, gender, career stage, city, and cross-platform identifiers.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Artist metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v2/artist/by-platform/{platform}/{identifier}:
+    get:
+      operationId: getArtistByPlatformId
+      tags:
+      - Artist
+      summary: Get artist by platform identifier
+      description: Resolve a Soundcharts artist UUID from a platform identifier.
+      parameters:
+      - $ref: '#/components/parameters/Platform'
+      - $ref: '#/components/parameters/Identifier'
+      responses:
+        '200':
+          description: Artist metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v2/artist/{uuid}/songs:
+    get:
+      operationId: getArtistSongs
+      tags:
+      - Artist
+      summary: Get artist songs
+      description: List the songs associated with an artist.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Paginated list of songs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongListResponse'
+  /api/v2/artist/{uuid}/albums:
+    get:
+      operationId: getArtistAlbums
+      tags:
+      - Artist
+      summary: Get artist albums
+      description: List the albums associated with an artist.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Paginated list of albums
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumListResponse'
+  /api/v2/artist/{uuid}/related:
+    get:
+      operationId: getSimilarArtists
+      tags:
+      - Artist
+      summary: Get similar artists
+      description: List artists similar to the given artist.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Related artists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistListResponse'
+  /api/v2/artist/{uuid}/current/stats:
+    get:
+      operationId: getArtistCurrentStats
+      tags:
+      - Artist
+      summary: Get artist current stats
+      description: Retrieve the latest aggregated audience and streaming stats for an artist.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Current stats
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatsResponse'
+  /api/v2/artist/{uuid}/soundcharts/score:
+    get:
+      operationId: getArtistSoundchartsScore
+      tags:
+      - Artist
+      summary: Get Soundcharts score
+      description: Retrieve the Soundcharts score time series for an artist.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Soundcharts score series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSeriesResponse'
+components:
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+  schemas:
+    Artist:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        name:
+          type: string
+        appUrl:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        countryCode:
+          type: string
+          nullable: true
+        gender:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        biography:
+          type: string
+          nullable: true
+        isni:
+          type: string
+          nullable: true
+        ipi:
+          type: string
+          nullable: true
+        genres:
+          type: array
+          items:
+            type: object
+            properties:
+              root:
+                type: string
+              sub:
+                type: array
+                items:
+                  type: string
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+    ArtistListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    ArtistResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Artist'
+    Album:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+          nullable: true
+        upc:
+          type: string
+          nullable: true
+        releaseDate:
+          type: string
+          format: date-time
+          nullable: true
+        label:
+          type: string
+          nullable: true
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    Song:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type: object
+          nullable: true
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type: string
+          nullable: true
+        releaseDate:
+          type: string
+          format: date-time
+          nullable: true
+        duration:
+          type: integer
+          nullable: true
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    MetricSeriesResponse:
+      type: object
+      properties:
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
+    SongListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Song'
+    MetricPoint:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        value:
+          type: number
+        platform:
+          type: string
+          nullable: true
+    AlbumListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Album'
+    StatsResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    AppId:
+      type: apiKey
+      in: header
+      name: x-app-id
+      description: Soundcharts application identifier.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Soundcharts API key.

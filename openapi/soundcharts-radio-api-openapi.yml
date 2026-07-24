@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  title: Soundcharts Album Radio API
+  description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
+  termsOfService: https://soundcharts.com/en/terms
+  contact:
+    name: Soundcharts API Support
+    url: https://developers.soundcharts.com/api/v2/doc
+  version: '2.0'
+servers:
+- url: https://customer.api.soundcharts.com
+security:
+- AppId: []
+  ApiKey: []
+tags:
+- name: Radio
+paths:
+  /api/v2/radio/{uuid}:
+    get:
+      operationId: getRadio
+      tags:
+      - Radio
+      summary: Get radio station
+      description: Retrieve radio station metadata by UUID.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Radio station metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObjectResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v2/radio/by-slug/{slug}:
+    get:
+      operationId: getRadioBySlug
+      tags:
+      - Radio
+      summary: Get radio station by slug
+      description: Resolve a radio station by slug.
+      parameters:
+      - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: Radio station metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObjectResponse'
+  /api/v2/artist/{uuid}/broadcasts:
+    get:
+      operationId: getArtistRadioSpins
+      tags:
+      - Radio
+      summary: Get artist radio spins
+      description: List radio airplay spins (broadcasts) for an artist.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Radio spins
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericListResponse'
+components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Slug:
+      name: slug
+      in: path
+      required: true
+      description: Chart, radio, or entity slug.
+      schema:
+        type: string
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    GenericListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    GenericObjectResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    AppId:
+      type: apiKey
+      in: header
+      name: x-app-id
+      description: Soundcharts application identifier.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Soundcharts API key.

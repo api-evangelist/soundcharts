@@ -1,0 +1,167 @@
+openapi: 3.0.1
+info:
+  title: Soundcharts Album Metrics API
+  description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
+  termsOfService: https://soundcharts.com/en/terms
+  contact:
+    name: Soundcharts API Support
+    url: https://developers.soundcharts.com/api/v2/doc
+  version: '2.0'
+servers:
+- url: https://customer.api.soundcharts.com
+security:
+- AppId: []
+  ApiKey: []
+tags:
+- name: Metrics
+paths:
+  /api/v2/song/{uuid}/audience/{platform}:
+    get:
+      operationId: getSongAudience
+      tags:
+      - Metrics
+      summary: Get song audience
+      description: Retrieve the audience metric time series for a song on a platform.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Platform'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: Audience series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSeriesResponse'
+  /api/v2/artist/{uuid}/audience/{platform}:
+    get:
+      operationId: getArtistAudience
+      tags:
+      - Metrics
+      summary: Get artist audience
+      description: Retrieve the follower/audience time series for an artist on a platform.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Platform'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: Audience series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSeriesResponse'
+  /api/v2/artist/{uuid}/streaming/{platform}/listening:
+    get:
+      operationId: getArtistStreamingAudience
+      tags:
+      - Metrics
+      summary: Get artist streaming audience
+      description: Retrieve the streaming listening audience time series for an artist on a platform.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Platform'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: Streaming audience series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSeriesResponse'
+  /api/v2/artist/{uuid}/popularity/{platform}:
+    get:
+      operationId: getArtistPopularity
+      tags:
+      - Metrics
+      summary: Get artist popularity
+      description: Retrieve the popularity index time series for an artist on a platform.
+      parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Platform'
+      responses:
+        '200':
+          description: Popularity series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSeriesResponse'
+components:
+  parameters:
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the date range (ISO 8601).
+      schema:
+        type: string
+        format: date
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the date range (ISO 8601).
+      schema:
+        type: string
+        format: date
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    MetricSeriesResponse:
+      type: object
+      properties:
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+    MetricPoint:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        value:
+          type: number
+        platform:
+          type: string
+          nullable: true
+  securitySchemes:
+    AppId:
+      type: apiKey
+      in: header
+      name: x-app-id
+      description: Soundcharts application identifier.
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Soundcharts API key.
