@@ -8,7 +8,20 @@ description: Soundcharts is a global music-market intelligence platform that agg
   API exposes this catalog and analytics layer over a REST interface at
   https://customer.api.soundcharts.com, authenticated with x-app-id and x-api-key
   headers.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/soundcharts.png
 tags:
 - Music
 - Analytics
@@ -20,162 +33,276 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: soundcharts:artists
-  name: Soundcharts Artists API
-  tags:
-  - Artists
-  - Metadata
-  - Audience
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: soundcharts:soundcharts-album-api
+  name: Soundcharts Album API
+  description: The Album API from Soundcharts — 4 operation(s) for album.
   humanURL: https://developers.soundcharts.com/api/reference/artist/summary
   baseURL: https://customer.api.soundcharts.com
-  properties:
-  - url: https://developers.soundcharts.com/api/reference/artist/summary
-    type: Documentation
-  - url: https://developers.soundcharts.com/api/v2/doc
-    type: APIReference
-  - url: openapi/soundcharts-openapi.yml
-    type: OpenAPI
-  - url: collections/soundcharts.postman_collection.json
-    type: PostmanCollection
-  - url: collections/soundcharts.opencollection.json
-    type: OpenCollection
-  description: Resolve and retrieve standardized artist metadata (name, country, genres,
-    ISNI/IPI, cross-platform identifiers), related artists, current stats, and the
-    Soundcharts score by UUID or platform identifier.
-- aid: soundcharts:songs
-  name: Soundcharts Songs API
   tags:
-  - Songs
-  - Metadata
-  - ISRC
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.soundcharts.com/api/reference/song/summary
-  baseURL: https://customer.api.soundcharts.com
+  - Album
   properties:
-  - url: https://developers.soundcharts.com/api/reference/song/summary
-    type: Documentation
-  - url: https://developers.soundcharts.com/api/v2/doc
-    type: APIReference
-  - url: openapi/soundcharts-openapi.yml
-    type: OpenAPI
-  - url: collections/soundcharts.postman_collection.json
-    type: PostmanCollection
-  - url: collections/soundcharts.opencollection.json
-    type: OpenCollection
-  description: Look up song metadata by UUID, ISRC, or platform identifier; retrieve
-    cross-platform identifiers, audio features, chart ranks, and audience metrics.
-- aid: soundcharts:albums
-  name: Soundcharts Albums API
+  - type: OpenAPI
+    url: openapi/soundcharts-album-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-artist-api
+  name: Soundcharts Artist API
+  description: The Artist API from Soundcharts — 7 operation(s) for artist.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
   tags:
-  - Albums
-  - Metadata
-  - UPC
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.soundcharts.com/api/reference/album/summary
-  baseURL: https://customer.api.soundcharts.com
+  - Artist
   properties:
-  - url: https://developers.soundcharts.com/api/reference/album/summary
-    type: Documentation
-  - url: https://developers.soundcharts.com/api/v2/doc
-    type: APIReference
-  - url: openapi/soundcharts-openapi.yml
-    type: OpenAPI
-  - url: collections/soundcharts.postman_collection.json
-    type: PostmanCollection
-  - url: collections/soundcharts.opencollection.json
-    type: OpenCollection
-  description: Retrieve album metadata by UUID, UPC, or platform identifier, including
-    tracklisting, identifiers, audience, popularity, and chart ranks.
-- aid: soundcharts:playlists
-  name: Soundcharts Playlists API
+  - type: OpenAPI
+    url: openapi/soundcharts-artist-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-chart-api
+  name: Soundcharts Chart API
+  description: The Chart API from Soundcharts — 5 operation(s) for chart.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
   tags:
-  - Playlists
-  - Curation
-  - Tracklisting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.soundcharts.com/api/reference/playlist/summary
-  baseURL: https://customer.api.soundcharts.com
+  - Chart
   properties:
-  - url: https://developers.soundcharts.com/api/reference/playlist/summary
-    type: Documentation
-  - url: https://developers.soundcharts.com/api/v2/doc
-    type: APIReference
-  - url: openapi/soundcharts-openapi.yml
-    type: OpenAPI
-  - url: collections/soundcharts.postman_collection.json
-    type: PostmanCollection
-  - url: collections/soundcharts.opencollection.json
-    type: OpenCollection
-  description: Resolve playlists by UUID or platform identifier and retrieve playlist
-    metadata and current tracklisting across streaming platforms.
-- aid: soundcharts:charts
-  name: Soundcharts Charts API
+  - type: OpenAPI
+    url: openapi/soundcharts-chart-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-metrics-api
+  name: Soundcharts Metrics API
+  description: The Metrics API from Soundcharts — 4 operation(s) for metrics.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
   tags:
-  - Charts
-  - Rankings
-  - TikTok
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.soundcharts.com/api/reference/charts/summary
-  baseURL: https://customer.api.soundcharts.com
+  - Metrics
   properties:
-  - url: https://developers.soundcharts.com/api/reference/charts/summary
-    type: Documentation
-  - url: https://developers.soundcharts.com/api/v2/doc
-    type: APIReference
-  - url: openapi/soundcharts-openapi.yml
-    type: OpenAPI
-  - url: collections/soundcharts.postman_collection.json
-    type: PostmanCollection
-  - url: collections/soundcharts.opencollection.json
-    type: OpenCollection
-  description: List song and album charts by platform and pull latest, historical,
-    and available rankings, plus the TikTok weekly music ranking.
-- aid: soundcharts:streaming-social-metrics
-  name: Soundcharts Streaming and Social Metrics API
+  - type: OpenAPI
+    url: openapi/soundcharts-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-playlist-api
+  name: Soundcharts Playlist API
+  description: The Playlist API from Soundcharts — 3 operation(s) for playlist.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
   tags:
-  - Streaming
-  - Social
-  - Audience
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
-  baseURL: https://customer.api.soundcharts.com
+  - Playlist
   properties:
-  - url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
-    type: Documentation
-  - url: https://developers.soundcharts.com/api/v2/doc
-    type: APIReference
-  - url: openapi/soundcharts-openapi.yml
-    type: OpenAPI
-  - url: collections/soundcharts.postman_collection.json
-    type: PostmanCollection
-  - url: collections/soundcharts.opencollection.json
-    type: OpenCollection
-  description: Time-series audience, follower, streaming, popularity, retention, and
-    short-video metrics for artists, songs, and albums across streaming and social
-    platforms.
-- aid: soundcharts:radio
+  - type: OpenAPI
+    url: openapi/soundcharts-playlist-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-radio-api
   name: Soundcharts Radio API
+  description: The Radio API from Soundcharts — 3 operation(s) for radio.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
   tags:
   - Radio
-  - Airplay
-  - Spins
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.soundcharts.com/api/reference/radio/summary
-  baseURL: https://customer.api.soundcharts.com
   properties:
-  - url: https://developers.soundcharts.com/api/reference/radio/summary
-    type: Documentation
-  - url: https://developers.soundcharts.com/api/v2/doc
-    type: APIReference
-  - url: openapi/soundcharts-openapi.yml
-    type: OpenAPI
-  - url: collections/soundcharts.postman_collection.json
-    type: PostmanCollection
-  - url: collections/soundcharts.opencollection.json
-    type: OpenCollection
-  description: Resolve radio stations by UUID or slug and retrieve artist radio spins
-    and spin counts for airplay tracking.
+  - type: OpenAPI
+    url: openapi/soundcharts-radio-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-referential-api
+  name: Soundcharts Referential API
+  description: The Referential API from Soundcharts — 1 operation(s) for referential.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
+  tags:
+  - Referential
+  properties:
+  - type: OpenAPI
+    url: openapi/soundcharts-referential-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-search-api
+  name: Soundcharts Search API
+  description: The Search API from Soundcharts — 1 operation(s) for search.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/soundcharts-search-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
+- aid: soundcharts:soundcharts-song-api
+  name: Soundcharts Song API
+  description: The Song API from Soundcharts — 4 operation(s) for song.
+  humanURL: https://developers.soundcharts.com/api/reference/artist/summary
+  baseURL: https://customer.api.soundcharts.com
+  tags:
+  - Song
+  properties:
+  - type: OpenAPI
+    url: openapi/soundcharts-song-api-openapi.yml
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/summary
+  - type: APIReference
+    url: https://developers.soundcharts.com/api/v2/doc
+  - type: PostmanCollection
+    url: collections/soundcharts.postman_collection.json
+  - type: OpenCollection
+    url: collections/soundcharts.opencollection.json
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/song/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/album/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/playlist/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/charts/summary
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/artist/get-streaming-audience
+  - type: Documentation
+    url: https://developers.soundcharts.com/api/reference/radio/summary
 common:
 - type: AgenticAccess
   url: agentic-access/soundcharts-agentic-access.yml
