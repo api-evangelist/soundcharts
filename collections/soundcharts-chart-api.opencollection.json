@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Soundcharts Album Chart API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-app-id",
+      "value": "{{x-app-id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chart",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get song charts by platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/chart/song/by-platform/:platform",
+            "params": [
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              }
+            ]
+          },
+          "docs": "List the available song charts for a platform."
+        },
+        {
+          "info": {
+            "name": "Get latest song ranking",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/chart/song/:slug/ranking/latest",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Chart, radio, or entity slug."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              }
+            ]
+          },
+          "docs": "Retrieve the latest ranking for a song chart."
+        },
+        {
+          "info": {
+            "name": "Get song ranking for a date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/chart/song/:slug/ranking/:datetime",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Chart, radio, or entity slug."
+              },
+              {
+                "name": "datetime",
+                "value": "",
+                "type": "path",
+                "description": "Ranking date in ISO 8601 format."
+              }
+            ]
+          },
+          "docs": "Retrieve a song chart ranking for a specific date."
+        },
+        {
+          "info": {
+            "name": "Get latest album ranking",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/chart/album/:slug/ranking/latest",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Chart, radio, or entity slug."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              }
+            ]
+          },
+          "docs": "Retrieve the latest ranking for an album chart."
+        },
+        {
+          "info": {
+            "name": "Get latest TikTok weekly music ranking",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/chart/tiktok/music/weekly/ranking/latest"
+          },
+          "docs": "Retrieve the latest TikTok weekly music ranking."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

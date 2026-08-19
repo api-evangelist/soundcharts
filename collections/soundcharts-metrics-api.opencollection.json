@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Soundcharts Album Metrics API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-app-id",
+      "value": "{{x-app-id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get song audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/song/:uuid/audience/:platform",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the date range (ISO 8601)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the date range (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Retrieve the audience metric time series for a song on a platform."
+        },
+        {
+          "info": {
+            "name": "Get artist audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/audience/:platform",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the date range (ISO 8601)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the date range (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Retrieve the follower/audience time series for an artist on a platform."
+        },
+        {
+          "info": {
+            "name": "Get artist streaming audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/streaming/:platform/listening",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the date range (ISO 8601)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the date range (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Retrieve the streaming listening audience time series for an artist on a platform."
+        },
+        {
+          "info": {
+            "name": "Get artist popularity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/popularity/:platform",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              }
+            ]
+          },
+          "docs": "Retrieve the popularity index time series for an artist on a platform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

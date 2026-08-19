@@ -1,0 +1,580 @@
+{
+  "item": [
+    {
+      "id": "2d1afacb-cb50-4c9c-9850-3af72d59a078",
+      "name": "Song",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18ab791a-677f-4b30-a627-fe4cd88270d9",
+          "name": "Get song metadata",
+          "request": {
+            "name": "Get song metadata",
+            "description": {
+              "content": "Retrieve standardized song metadata by UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "song",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af87a252-3e6d-4e9e-9c5a-6c24582a2be7",
+              "name": "Song metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "song",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"e7fc2de0-e96d-6dad-dad3-771c5a1801a6\",\n    \"name\": \"string\",\n    \"isrc\": {\n      \"value\": \"string\",\n      \"countryCode\": \"string\"\n    },\n    \"creditName\": \"string\",\n    \"releaseDate\": \"1994-05-03T07:31:29.588Z\",\n    \"duration\": 2270,\n    \"artists\": [\n      {\n        \"uuid\": \"7bab2eaa-f867-4d2f-a74a-8c228a8bcc9e\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      },\n      {\n        \"uuid\": \"6209cb2c-b57d-0120-d353-39b96d47df7f\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19f44a3e-6ec4-4e05-b783-23e06c3355e5",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "song",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"key\": \"string\",\n      \"code\": 4166,\n      \"message\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"code\": 3883,\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1e209a8-8906-4007-9e81-d9eabcca2dd5",
+          "name": "Get song by ISRC",
+          "request": {
+            "name": "Get song by ISRC",
+            "description": {
+              "content": "Resolve a song by its ISRC code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "song",
+                "by-isrc",
+                ":isrc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "isrc",
+                  "description": "(Required) International Standard Recording Code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65a3aa6d-9cc2-4fb7-8cd1-b654022dab1c",
+              "name": "Song metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "song",
+                    "by-isrc",
+                    ":isrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isrc",
+                      "description": "(Required) International Standard Recording Code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"e7b97349-bf1f-6987-8615-e956f0c34da9\",\n    \"name\": \"string\",\n    \"isrc\": {\n      \"value\": \"string\",\n      \"countryCode\": \"string\"\n    },\n    \"creditName\": \"string\",\n    \"releaseDate\": \"1977-04-19T23:56:15.120Z\",\n    \"duration\": 5188,\n    \"artists\": [\n      {\n        \"uuid\": \"bed22e07-3700-b2a8-c33b-12ea50a301bb\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      },\n      {\n        \"uuid\": \"3a2a2706-ebb9-76cf-920d-eb331b269d97\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c95b74b-d206-4092-a45a-8c9b82590954",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "song",
+                    "by-isrc",
+                    ":isrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isrc",
+                      "description": "(Required) International Standard Recording Code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"key\": \"string\",\n      \"code\": 1905,\n      \"message\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"code\": 9407,\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e96d6b72-c31e-4a90-948a-63dcdafffcfc",
+          "name": "Get song by platform identifier",
+          "request": {
+            "name": "Get song by platform identifier",
+            "description": {
+              "content": "Resolve a song by a platform identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "song",
+                "by-platform",
+                ":platform",
+                ":identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "platform",
+                  "description": "(Required) Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) Platform-specific identifier for the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fcc8dbe-52e7-45c2-8ac9-903d043f498e",
+              "name": "Song metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "song",
+                    "by-platform",
+                    ":platform",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platform",
+                      "description": "(Required) Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Platform-specific identifier for the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"e7b97349-bf1f-6987-8615-e956f0c34da9\",\n    \"name\": \"string\",\n    \"isrc\": {\n      \"value\": \"string\",\n      \"countryCode\": \"string\"\n    },\n    \"creditName\": \"string\",\n    \"releaseDate\": \"1977-04-19T23:56:15.120Z\",\n    \"duration\": 5188,\n    \"artists\": [\n      {\n        \"uuid\": \"bed22e07-3700-b2a8-c33b-12ea50a301bb\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      },\n      {\n        \"uuid\": \"3a2a2706-ebb9-76cf-920d-eb331b269d97\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a537ee54-9314-4cb9-b5ed-55e699c6693e",
+          "name": "Get song audio features",
+          "request": {
+            "name": "Get song audio features",
+            "description": {
+              "content": "Retrieve audio features (tempo, energy, danceability, etc.) for a song.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "song",
+                ":uuid",
+                "audio-features"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67f7bcbc-3ed4-4567-b808-61b8ba6310ea",
+              "name": "Audio features",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "song",
+                    ":uuid",
+                    "audio-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"key_0\": 314,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://customer.api.soundcharts.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-app-id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "996e9fbd-73b1-45ea-af96-5a5d658d88bc",
+    "name": "Soundcharts Album Song API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.\n\nContact Support:\n Name: Soundcharts API Support",
+      "type": "text/plain"
+    }
+  }
+}

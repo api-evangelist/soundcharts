@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Soundcharts Album API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-app-id",
+      "value": "{{x-app-id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Album",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get album metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/album/by-uuid/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve standardized album metadata by UUID."
+        },
+        {
+          "info": {
+            "name": "Get album by UPC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/album/by-upc/:upc",
+            "params": [
+              {
+                "name": "upc",
+                "value": "",
+                "type": "path",
+                "description": "Universal Product Code."
+              }
+            ]
+          },
+          "docs": "Resolve an album by its UPC code."
+        },
+        {
+          "info": {
+            "name": "Get album by platform identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/album/by-platform/:platform/:identifier",
+            "params": [
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Platform-specific identifier for the entity."
+              }
+            ]
+          },
+          "docs": "Resolve an album by a platform identifier."
+        },
+        {
+          "info": {
+            "name": "Get album tracklisting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2.26/album/:uuid/tracks",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              }
+            ]
+          },
+          "docs": "List the tracks contained in an album."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

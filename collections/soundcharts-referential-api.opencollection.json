@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Soundcharts Album Referential API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-app-id",
+      "value": "{{x-app-id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Referential",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get platforms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/referential/platforms"
+          },
+          "docs": "List the platforms supported by the Soundcharts API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

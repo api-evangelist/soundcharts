@@ -1,0 +1,942 @@
+{
+  "item": [
+    {
+      "id": "59c6198d-d189-451b-a3c4-b188b55cb9d4",
+      "name": "Artist",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec2536d3-0f7e-4c25-a784-6311e8cfcbaa",
+          "name": "Get artist metadata",
+          "request": {
+            "name": "Get artist metadata",
+            "description": {
+              "content": "Retrieve standardized artist metadata including name, country, genres, ISNI, IPI, biography, gender, career stage, city, and cross-platform identifiers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "artist",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3a477bf-daf8-4c4a-b655-61bfd494f47a",
+              "name": "Artist metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"794167a1-916b-fbb6-0211-1cb854fd2f78\",\n    \"slug\": \"string\",\n    \"name\": \"string\",\n    \"appUrl\": \"string\",\n    \"imageUrl\": \"string\",\n    \"countryCode\": \"string\",\n    \"gender\": \"string\",\n    \"type\": \"string\",\n    \"biography\": \"string\",\n    \"isni\": \"string\",\n    \"ipi\": \"string\",\n    \"genres\": [\n      {\n        \"root\": \"string\",\n        \"sub\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"root\": \"string\",\n        \"sub\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17b8a6d0-2f53-4326-972d-4a68473b45f9",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"key\": \"string\",\n      \"code\": 4435,\n      \"message\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"code\": 2754,\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20e94246-2549-47e3-8928-2f8f4d933e59",
+          "name": "Get artist by platform identifier",
+          "request": {
+            "name": "Get artist by platform identifier",
+            "description": {
+              "content": "Resolve a Soundcharts artist UUID from a platform identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "artist",
+                "by-platform",
+                ":platform",
+                ":identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "platform",
+                  "description": "(Required) Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) Platform-specific identifier for the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5642f704-013d-462c-8fbb-f8b78924f482",
+              "name": "Artist metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    "by-platform",
+                    ":platform",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platform",
+                      "description": "(Required) Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Platform-specific identifier for the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"5da677d5-8c45-92db-f643-7f9c6e1de391\",\n    \"slug\": \"string\",\n    \"name\": \"string\",\n    \"appUrl\": \"string\",\n    \"imageUrl\": \"string\",\n    \"countryCode\": \"string\",\n    \"gender\": \"string\",\n    \"type\": \"string\",\n    \"biography\": \"string\",\n    \"isni\": \"string\",\n    \"ipi\": \"string\",\n    \"genres\": [\n      {\n        \"root\": \"string\",\n        \"sub\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"root\": \"string\",\n        \"sub\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "554a0e37-c97d-408a-8887-d7babe232324",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    "by-platform",
+                    ":platform",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platform",
+                      "description": "(Required) Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Platform-specific identifier for the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"key\": \"string\",\n      \"code\": 4825,\n      \"message\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"code\": 7655,\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f583168f-535a-41c0-a40f-74e63c9f2c18",
+          "name": "Get artist songs",
+          "request": {
+            "name": "Get artist songs",
+            "description": {
+              "content": "List the songs associated with an artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "artist",
+                ":uuid",
+                "songs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b09c2f21-71b1-4442-9f1a-cffe533da1ab",
+              "name": "Paginated list of songs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    ":uuid",
+                    "songs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"offset\": 7968,\n    \"limit\": 1324,\n    \"total\": 4308\n  },\n  \"related\": {\n    \"self\": \"string\",\n    \"previous\": \"string\",\n    \"next\": \"string\"\n  },\n  \"items\": [\n    {\n      \"uuid\": \"be036d08-fcb7-52eb-fc30-e21214238f12\",\n      \"name\": \"string\",\n      \"isrc\": {\n        \"value\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"creditName\": \"string\",\n      \"releaseDate\": \"1963-07-21T15:11:11.311Z\",\n      \"duration\": 3414,\n      \"artists\": [\n        {\n          \"uuid\": \"074d3158-baab-be6c-301a-8b602e6e0f44\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"uuid\": \"4a65f981-dc00-f3e7-3c5a-75317d8435ee\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"uuid\": \"8fa290c0-c84d-9546-0479-ca13ea7c6c51\",\n      \"name\": \"string\",\n      \"isrc\": {\n        \"value\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"creditName\": \"string\",\n      \"releaseDate\": \"2015-07-20T05:36:44.516Z\",\n      \"duration\": 7021,\n      \"artists\": [\n        {\n          \"uuid\": \"36d3e8bf-af4d-969d-5f0a-d29e28840633\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"uuid\": \"03a1bdcf-33d8-1781-d397-69947cd82a25\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aad5ef75-7d52-4182-a6bd-9a4045fa7c9d",
+          "name": "Get artist albums",
+          "request": {
+            "name": "Get artist albums",
+            "description": {
+              "content": "List the albums associated with an artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "artist",
+                ":uuid",
+                "albums"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ee35b70-09b0-48ff-a186-92ca42f54a09",
+              "name": "Paginated list of albums",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    ":uuid",
+                    "albums"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"offset\": 5943,\n    \"limit\": 4677,\n    \"total\": 5673\n  },\n  \"related\": {\n    \"self\": \"string\",\n    \"previous\": \"string\",\n    \"next\": \"string\"\n  },\n  \"items\": [\n    {\n      \"uuid\": \"c3dfa2c2-33c3-55a8-8316-6e37700a26bb\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"upc\": \"string\",\n      \"releaseDate\": \"1949-01-03T05:01:44.968Z\",\n      \"label\": \"string\",\n      \"artists\": [\n        {\n          \"uuid\": \"dd0aed9f-f88b-bdac-1ee9-f92f0075200f\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"uuid\": \"689c072e-a8e7-5e72-0097-0a046d162be9\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"uuid\": \"67714438-607e-42b5-f10c-e5f34280e856\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"upc\": \"string\",\n      \"releaseDate\": \"1961-10-07T08:57:13.973Z\",\n      \"label\": \"string\",\n      \"artists\": [\n        {\n          \"uuid\": \"7a66b937-1080-3092-a386-b69b1e71e1bc\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"uuid\": \"02f3018e-0cbd-3f23-46f1-1a9e7b9e01a6\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03cb68ea-3230-455d-ac1c-6634bd350dd1",
+          "name": "Get similar artists",
+          "request": {
+            "name": "Get similar artists",
+            "description": {
+              "content": "List artists similar to the given artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "artist",
+                ":uuid",
+                "related"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f419a9aa-e93b-4e96-a81c-73a79bd443f6",
+              "name": "Related artists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    ":uuid",
+                    "related"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"offset\": 6087,\n    \"limit\": 2537,\n    \"total\": 1470\n  },\n  \"related\": {\n    \"self\": \"string\",\n    \"previous\": \"string\",\n    \"next\": \"string\"\n  },\n  \"items\": [\n    {\n      \"uuid\": \"d1d3e572-f8d6-769e-7e1a-e42bc0644c50\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"appUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"countryCode\": \"string\",\n      \"gender\": \"string\",\n      \"type\": \"string\",\n      \"biography\": \"string\",\n      \"isni\": \"string\",\n      \"ipi\": \"string\",\n      \"genres\": [\n        {\n          \"root\": \"string\",\n          \"sub\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"root\": \"string\",\n          \"sub\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"uuid\": \"2cbd9cfd-4dde-1e21-568a-9345368c69ea\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"appUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"countryCode\": \"string\",\n      \"gender\": \"string\",\n      \"type\": \"string\",\n      \"biography\": \"string\",\n      \"isni\": \"string\",\n      \"ipi\": \"string\",\n      \"genres\": [\n        {\n          \"root\": \"string\",\n          \"sub\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"root\": \"string\",\n          \"sub\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22fb7a1a-c69b-4a1a-a650-4909eae71620",
+          "name": "Get artist current stats",
+          "request": {
+            "name": "Get artist current stats",
+            "description": {
+              "content": "Retrieve the latest aggregated audience and streaming stats for an artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "artist",
+                ":uuid",
+                "current",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab414cef-a27c-4e0a-be43-d69059dc34c5",
+              "name": "Current stats",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    ":uuid",
+                    "current",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"key_0\": 3119\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96f37f5c-0df8-45d7-bcf0-40fdc3b2261d",
+          "name": "Get Soundcharts score",
+          "request": {
+            "name": "Get Soundcharts score",
+            "description": {
+              "content": "Retrieve the Soundcharts score time series for an artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "artist",
+                ":uuid",
+                "soundcharts",
+                "score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "794f6b1e-a256-4ccf-864b-50b40d9cc8ad",
+              "name": "Soundcharts score series",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "artist",
+                    ":uuid",
+                    "soundcharts",
+                    "score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"related\": {\n    \"self\": \"string\",\n    \"previous\": \"string\",\n    \"next\": \"string\"\n  },\n  \"items\": [\n    {\n      \"date\": \"1998-11-27T18:41:13.915Z\",\n      \"value\": 3435.455300504783,\n      \"platform\": \"string\"\n    },\n    {\n      \"date\": \"1980-03-23T20:25:23.637Z\",\n      \"value\": 3135.6744420889318,\n      \"platform\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://customer.api.soundcharts.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-app-id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "292a7090-a4e8-4a69-be8d-f3467aa5d99c",
+    "name": "Soundcharts Album Artist API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.\n\nContact Support:\n Name: Soundcharts API Support",
+      "type": "text/plain"
+    }
+  }
+}

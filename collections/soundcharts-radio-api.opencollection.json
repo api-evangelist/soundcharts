@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Soundcharts Album Radio API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-app-id",
+      "value": "{{x-app-id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Radio",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get radio station",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/radio/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve radio station metadata by UUID."
+        },
+        {
+          "info": {
+            "name": "Get radio station by slug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/radio/by-slug/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Chart, radio, or entity slug."
+              }
+            ]
+          },
+          "docs": "Resolve a radio station by slug."
+        },
+        {
+          "info": {
+            "name": "Get artist radio spins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/broadcasts",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              }
+            ]
+          },
+          "docs": "List radio airplay spins (broadcasts) for an artist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

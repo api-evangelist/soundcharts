@@ -1,0 +1,605 @@
+{
+  "item": [
+    {
+      "id": "9815d272-3581-419d-a15f-b0a5c7a08f89",
+      "name": "Album",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3391e38a-3ca6-4f66-8c41-61d522a45980",
+          "name": "Get album metadata",
+          "request": {
+            "name": "Get album metadata",
+            "description": {
+              "content": "Retrieve standardized album metadata by UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "album",
+                "by-uuid",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b991145-4edb-44e4-8ec5-64ff90ce1e3f",
+              "name": "Album metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "album",
+                    "by-uuid",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"e2669ae0-dc98-1049-ee70-155431f46d90\",\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"upc\": \"string\",\n    \"releaseDate\": \"1951-07-18T20:44:26.012Z\",\n    \"label\": \"string\",\n    \"artists\": [\n      {\n        \"uuid\": \"dfd92ec6-d87e-14f5-40ed-0227f58d6a6d\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      },\n      {\n        \"uuid\": \"594935c8-4790-212b-0e96-cbbcd9143980\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54eb7a6c-7de6-4fb1-bb8d-9f20c2504aba",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "album",
+                    "by-uuid",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"key\": \"string\",\n      \"code\": 3146,\n      \"message\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"code\": 7542,\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebaea51b-4da8-4310-8e64-a5bbe52daa66",
+          "name": "Get album by UPC",
+          "request": {
+            "name": "Get album by UPC",
+            "description": {
+              "content": "Resolve an album by its UPC code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "album",
+                "by-upc",
+                ":upc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "upc",
+                  "description": "(Required) Universal Product Code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d4cdde9-3fbd-4054-9ef9-e62b03308098",
+              "name": "Album metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "album",
+                    "by-upc",
+                    ":upc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upc",
+                      "description": "(Required) Universal Product Code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"0be79676-cbf4-01ae-13e2-adfdeaf18895\",\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"upc\": \"string\",\n    \"releaseDate\": \"1957-06-14T05:54:39.752Z\",\n    \"label\": \"string\",\n    \"artists\": [\n      {\n        \"uuid\": \"cfde549d-81c7-68bb-2981-344d53ef29d5\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      },\n      {\n        \"uuid\": \"72f5551a-d46c-e3b8-8b29-99d2cde3a5f5\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc43a794-ec74-4740-91cb-c81a35dc65c1",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "album",
+                    "by-upc",
+                    ":upc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upc",
+                      "description": "(Required) Universal Product Code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"key\": \"string\",\n      \"code\": 4294,\n      \"message\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"code\": 9221,\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f87510fb-5c3a-45da-a156-b2dfa968757e",
+          "name": "Get album by platform identifier",
+          "request": {
+            "name": "Get album by platform identifier",
+            "description": {
+              "content": "Resolve an album by a platform identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "album",
+                "by-platform",
+                ":platform",
+                ":identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "platform",
+                  "description": "(Required) Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) Platform-specific identifier for the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ff85cd5-3efc-4607-b90a-8a19748e0588",
+              "name": "Album metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "album",
+                    "by-platform",
+                    ":platform",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platform",
+                      "description": "(Required) Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Platform-specific identifier for the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {\n    \"uuid\": \"0be79676-cbf4-01ae-13e2-adfdeaf18895\",\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"upc\": \"string\",\n    \"releaseDate\": \"1957-06-14T05:54:39.752Z\",\n    \"label\": \"string\",\n    \"artists\": [\n      {\n        \"uuid\": \"cfde549d-81c7-68bb-2981-344d53ef29d5\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      },\n      {\n        \"uuid\": \"72f5551a-d46c-e3b8-8b29-99d2cde3a5f5\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"appUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"countryCode\": \"string\",\n        \"gender\": \"string\",\n        \"type\": \"string\",\n        \"biography\": \"string\",\n        \"isni\": \"string\",\n        \"ipi\": \"string\",\n        \"genres\": [\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"root\": \"string\",\n            \"sub\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a01ffe49-2d81-4556-9e17-ed1a39b6ef0f",
+          "name": "Get album tracklisting",
+          "request": {
+            "name": "Get album tracklisting",
+            "description": {
+              "content": "List the tracks contained in an album.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.26",
+                "album",
+                ":uuid",
+                "tracks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) Soundcharts entity UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d7a6ba0-5670-4278-8b55-0189b737c00e",
+              "name": "Album tracklisting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.26",
+                    "album",
+                    ":uuid",
+                    "tracks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) Soundcharts entity UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-app-id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"offset\": 2354,\n    \"limit\": 4239,\n    \"total\": 3006\n  },\n  \"related\": {\n    \"self\": \"string\",\n    \"previous\": \"string\",\n    \"next\": \"string\"\n  },\n  \"items\": [\n    {\n      \"uuid\": \"371db3d8-ade9-a144-3b6c-322cb601b1c3\",\n      \"name\": \"string\",\n      \"isrc\": {\n        \"value\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"creditName\": \"string\",\n      \"releaseDate\": \"1956-10-07T00:37:20.139Z\",\n      \"duration\": 4671,\n      \"artists\": [\n        {\n          \"uuid\": \"20678ab5-215f-22ad-a9ec-afa82fea35f6\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"uuid\": \"a8459ab6-1892-7f2b-7ca2-7dc764c59910\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"uuid\": \"22fe1c54-f7cf-f18d-5a37-dcd36b91044b\",\n      \"name\": \"string\",\n      \"isrc\": {\n        \"value\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"creditName\": \"string\",\n      \"releaseDate\": \"2011-01-31T15:15:13.611Z\",\n      \"duration\": 745,\n      \"artists\": [\n        {\n          \"uuid\": \"4055ba5c-2453-d26a-1a44-4a8c6f1e3c5d\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"uuid\": \"1f302b53-d8e7-b870-9a1a-2435ef28a4aa\",\n          \"slug\": \"string\",\n          \"name\": \"string\",\n          \"appUrl\": \"string\",\n          \"imageUrl\": \"string\",\n          \"countryCode\": \"string\",\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"biography\": \"string\",\n          \"isni\": \"string\",\n          \"ipi\": \"string\",\n          \"genres\": [\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"root\": \"string\",\n              \"sub\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://customer.api.soundcharts.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-app-id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5942c02a-f73d-4a6c-a6dd-c39cf76a69cd",
+    "name": "Soundcharts Album API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.\n\nContact Support:\n Name: Soundcharts API Support",
+      "type": "text/plain"
+    }
+  }
+}

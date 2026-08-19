@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Soundcharts Album Artist API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-app-id",
+      "value": "{{x-app-id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get artist metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve standardized artist metadata including name, country, genres, ISNI, IPI, biography, gender, career stage, city, and cross-platform identifiers."
+        },
+        {
+          "info": {
+            "name": "Get artist by platform identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/by-platform/:platform/:identifier",
+            "params": [
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Platform-specific identifier for the entity."
+              }
+            ]
+          },
+          "docs": "Resolve a Soundcharts artist UUID from a platform identifier."
+        },
+        {
+          "info": {
+            "name": "Get artist songs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/songs",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              }
+            ]
+          },
+          "docs": "List the songs associated with an artist."
+        },
+        {
+          "info": {
+            "name": "Get artist albums",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/albums",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              }
+            ]
+          },
+          "docs": "List the albums associated with an artist."
+        },
+        {
+          "info": {
+            "name": "Get similar artists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/related",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "List artists similar to the given artist."
+        },
+        {
+          "info": {
+            "name": "Get artist current stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/current/stats",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve the latest aggregated audience and streaming stats for an artist."
+        },
+        {
+          "info": {
+            "name": "Get Soundcharts score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/artist/:uuid/soundcharts/score",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve the Soundcharts score time series for an artist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

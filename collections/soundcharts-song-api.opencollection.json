@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Soundcharts Album Song API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-app-id",
+      "value": "{{x-app-id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Song",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get song metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/song/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve standardized song metadata by UUID."
+        },
+        {
+          "info": {
+            "name": "Get song by ISRC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/song/by-isrc/:isrc",
+            "params": [
+              {
+                "name": "isrc",
+                "value": "",
+                "type": "path",
+                "description": "International Standard Recording Code."
+              }
+            ]
+          },
+          "docs": "Resolve a song by its ISRC code."
+        },
+        {
+          "info": {
+            "name": "Get song by platform identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/song/by-platform/:platform/:identifier",
+            "params": [
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path",
+                "description": "Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok)."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Platform-specific identifier for the entity."
+              }
+            ]
+          },
+          "docs": "Resolve a song by a platform identifier."
+        },
+        {
+          "info": {
+            "name": "Get song audio features",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://customer.api.soundcharts.com/api/v2/song/:uuid/audio-features",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Soundcharts entity UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve audio features (tempo, energy, danceability, etc.) for a song."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
