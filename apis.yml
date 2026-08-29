@@ -8,6 +8,18 @@ description: Soundcharts is a global music-market intelligence platform that agg
   API exposes this catalog and analytics layer over a REST interface at
   https://customer.api.soundcharts.com, authenticated with x-app-id and x-api-key
   headers.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
