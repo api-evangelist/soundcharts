@@ -318,6 +318,9 @@ apis:
   - type: Documentation
     url: https://developers.soundcharts.com/api/reference/radio/summary
 common:
+- type: CapabilityMap
+  url: capabilities/soundcharts-capability-edges.yml
+  name: Soundcharts Business Capability Map
 - type: AgenticAccess
   url: agentic-access/soundcharts-agentic-access.yml
 - type: DomainSecurity

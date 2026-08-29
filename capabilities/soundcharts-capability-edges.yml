@@ -1,0 +1,26 @@
+slug: soundcharts
+provider: Soundcharts
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Metrics
+  spec_file: soundcharts-metrics-api-openapi.yml
+  capability_id: BC-3770.30
+  capability_id_l1: BC-3770
+  capability_name: Content Performance Analytics
+  confidence: 0.7
+  evidence: getArtistStreamingAudience Get artist streaming audience; getArtistPopularity Get artist popularity;
+    getSongAudience Get song audience
+  reason: Time-series audience, streaming-listening and popularity metrics per song/artist and platform
+    (MetricSeriesResponse, MetricPoint) are analytics of content performance across platforms and over
+    time.
