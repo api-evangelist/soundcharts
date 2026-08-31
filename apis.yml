@@ -81,7 +81,7 @@ apis:
   humanURL: https://developers.soundcharts.com/api/reference/artist/summary
   baseURL: https://customer.api.soundcharts.com
   tags:
-  - Artists
+  - Artist
   tags_raw:
   - Artist
   properties:
