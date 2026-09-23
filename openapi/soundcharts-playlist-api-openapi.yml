@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Soundcharts Album Playlist API
+  title: Soundcharts Playlist API
   description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
   termsOfService: https://soundcharts.com/en/terms
   contact:
@@ -69,62 +69,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/SongListResponse'
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 100
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination offset.
-      schema:
-        type: integer
-        default: 0
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
   schemas:
-    PlaylistResponse:
+    Song:
       type: object
       properties:
-        object:
-          $ref: '#/components/schemas/Playlist'
-    Related:
-      type: object
-      properties:
-        self:
+        uuid:
           type: string
-        previous:
+          format: uuid
+        name:
           type: string
-          nullable: true
-        next:
-          type: string
-          nullable: true
+        isrc:
+          type:
+          - object
+          - 'null'
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration:
+          type:
+          - integer
+          - 'null'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
     ErrorResponse:
       type: object
       properties:
@@ -139,7 +118,27 @@ components:
                 type: integer
               message:
                 type: string
-    Song:
+    SongListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Song'
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+    Playlist:
       type: object
       properties:
         uuid:
@@ -147,28 +146,42 @@ components:
           format: uuid
         name:
           type: string
-        isrc:
-          type: object
-          nullable: true
-          properties:
-            value:
-              type: string
-            countryCode:
-              type: string
-        creditName:
+        platform:
           type: string
-          nullable: true
-        releaseDate:
+        type:
+          type:
+          - string
+          - 'null'
+        curator:
+          type:
+          - string
+          - 'null'
+        latestSubscriberCount:
+          type:
+          - integer
+          - 'null'
+        latestTrackCount:
+          type:
+          - integer
+          - 'null'
+    PlaylistResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Playlist'
+    Related:
+      type: object
+      properties:
+        self:
           type: string
-          format: date-time
-          nullable: true
-        duration:
-          type: integer
-          nullable: true
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
     Artist:
       type: object
       properties:
@@ -182,26 +195,33 @@ components:
         appUrl:
           type: string
         imageUrl:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         countryCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         gender:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         biography:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         isni:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         ipi:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         genres:
           type: array
           items:
@@ -213,48 +233,6 @@ components:
                 type: array
                 items:
                   type: string
-    Page:
-      type: object
-      properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
-    SongListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Song'
-    Playlist:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        platform:
-          type: string
-        type:
-          type: string
-          nullable: true
-        curator:
-          type: string
-          nullable: true
-        latestSubscriberCount:
-          type: integer
-          nullable: true
-        latestTrackCount:
-          type: integer
-          nullable: true
   responses:
     NotFound:
       description: Entity not found
@@ -262,6 +240,45 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
   securitySchemes:
     AppId:
       type: apiKey

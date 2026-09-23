@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Soundcharts Album Search API
+  title: Soundcharts Search API
   description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
   termsOfService: https://soundcharts.com/en/terms
   contact:
@@ -37,18 +37,6 @@ paths:
                 $ref: '#/components/schemas/GenericListResponse'
 components:
   schemas:
-    SearchRequest:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Entity type to search (artist, song, album, playlist).
-        term:
-          type: string
-          description: Search term.
-      required:
-      - type
-      - term
     GenericListResponse:
       type: object
       properties:
@@ -70,17 +58,31 @@ components:
           type: integer
         total:
           type: integer
+    SearchRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Entity type to search (artist, song, album, playlist).
+        term:
+          type: string
+          description: Search term.
+      required:
+      - type
+      - term
     Related:
       type: object
       properties:
         self:
           type: string
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
   securitySchemes:
     AppId:
       type: apiKey

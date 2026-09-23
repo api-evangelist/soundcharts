@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Soundcharts Album Referential API
+  title: Soundcharts Referential API
   description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
   termsOfService: https://soundcharts.com/en/terms
   contact:
@@ -58,11 +58,13 @@ components:
         self:
           type: string
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
   securitySchemes:
     AppId:
       type: apiKey

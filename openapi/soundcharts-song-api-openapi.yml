@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Soundcharts Album Song API
+  title: Soundcharts Song API
   description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
   termsOfService: https://soundcharts.com/en/terms
   contact:
@@ -90,80 +90,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericObjectResponse'
 components:
-  parameters:
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
   schemas:
-    GenericObjectResponse:
-      type: object
-      properties:
-        object:
-          type: object
-          additionalProperties: true
-    Artist:
+    Song:
       type: object
       properties:
         uuid:
           type: string
           format: uuid
-        slug:
-          type: string
         name:
           type: string
-        appUrl:
-          type: string
-        imageUrl:
-          type: string
-          nullable: true
-        countryCode:
-          type: string
-          nullable: true
-        gender:
-          type: string
-          nullable: true
-        type:
-          type: string
-          nullable: true
-        biography:
-          type: string
-          nullable: true
-        isni:
-          type: string
-          nullable: true
-        ipi:
-          type: string
-          nullable: true
-        genres:
+        isrc:
+          type:
+          - object
+          - 'null'
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration:
+          type:
+          - integer
+          - 'null'
+        artists:
           type: array
           items:
-            type: object
-            properties:
-              root:
-                type: string
-              sub:
-                type: array
-                items:
-                  type: string
+            $ref: '#/components/schemas/Artist'
     SongResponse:
       type: object
       properties:
@@ -183,36 +144,63 @@ components:
                 type: integer
               message:
                 type: string
-    Song:
+    GenericObjectResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
+    Artist:
       type: object
       properties:
         uuid:
           type: string
           format: uuid
+        slug:
+          type: string
         name:
           type: string
-        isrc:
-          type: object
-          nullable: true
-          properties:
-            value:
-              type: string
-            countryCode:
-              type: string
-        creditName:
+        appUrl:
           type: string
-          nullable: true
-        releaseDate:
-          type: string
-          format: date-time
-          nullable: true
-        duration:
-          type: integer
-          nullable: true
-        artists:
+        imageUrl:
+          type:
+          - string
+          - 'null'
+        countryCode:
+          type:
+          - string
+          - 'null'
+        gender:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        biography:
+          type:
+          - string
+          - 'null'
+        isni:
+          type:
+          - string
+          - 'null'
+        ipi:
+          type:
+          - string
+          - 'null'
+        genres:
           type: array
           items:
-            $ref: '#/components/schemas/Artist'
+            type: object
+            properties:
+              root:
+                type: string
+              sub:
+                type: array
+                items:
+                  type: string
   responses:
     NotFound:
       description: Entity not found
@@ -220,6 +208,29 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
   securitySchemes:
     AppId:
       type: apiKey

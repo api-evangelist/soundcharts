@@ -1,15 +1,7 @@
 {
   "provider": "soundcharts",
   "sources": [
-    "soundcharts-album-api-openapi.yml",
-    "soundcharts-artist-api-openapi.yml",
-    "soundcharts-chart-api-openapi.yml",
-    "soundcharts-metrics-api-openapi.yml",
-    "soundcharts-playlist-api-openapi.yml",
-    "soundcharts-radio-api-openapi.yml",
-    "soundcharts-referential-api-openapi.yml",
-    "soundcharts-search-api-openapi.yml",
-    "soundcharts-song-api-openapi.yml"
+    "_original/soundcharts-openapi.yml"
   ],
   "outputs": [
     "soundcharts-album-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "soundcharts-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "soundcharts-album-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-artist-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-chart-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-playlist-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-radio-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-referential-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "soundcharts-song-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

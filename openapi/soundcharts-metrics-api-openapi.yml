@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Soundcharts Album Metrics API
+  title: Soundcharts Metrics API
   description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
   termsOfService: https://soundcharts.com/en/terms
   contact:
@@ -90,38 +90,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricSeriesResponse'
 components:
-  parameters:
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the date range (ISO 8601).
-      schema:
-        type: string
-        format: date
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the date range (ISO 8601).
-      schema:
-        type: string
-        format: date
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
   schemas:
     MetricSeriesResponse:
       type: object
@@ -138,11 +106,13 @@ components:
         self:
           type: string
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
     MetricPoint:
       type: object
       properties:
@@ -152,8 +122,41 @@ components:
         value:
           type: number
         platform:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+  parameters:
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the date range (ISO 8601).
+      schema:
+        type: string
+        format: date
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the date range (ISO 8601).
+      schema:
+        type: string
+        format: date
   securitySchemes:
     AppId:
       type: apiKey

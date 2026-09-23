@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Soundcharts Album Artist API
+  title: Soundcharts Artist API
   description: REST API for the Soundcharts music-market intelligence platform. Provides standardized metadata and real-time and historical performance data for artists, songs, albums, and playlists across streaming, social, chart, and radio sources. Requests are authenticated with the x-app-id and x-api-key headers.
   termsOfService: https://soundcharts.com/en/terms
   contact:
@@ -137,15 +137,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricSeriesResponse'
 components:
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination offset.
-      schema:
-        type: integer
-        default: 0
     Identifier:
       name: identifier
       in: path
@@ -153,14 +152,13 @@ components:
       description: Platform-specific identifier for the entity.
       schema:
         type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of items to return.
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
       schema:
-        type: integer
-        default: 100
+        type: string
     Uuid:
       name: uuid
       in: path
@@ -169,58 +167,23 @@ components:
       schema:
         type: string
         format: uuid
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
       schema:
-        type: string
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
   schemas:
-    Artist:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        slug:
-          type: string
-        name:
-          type: string
-        appUrl:
-          type: string
-        imageUrl:
-          type: string
-          nullable: true
-        countryCode:
-          type: string
-          nullable: true
-        gender:
-          type: string
-          nullable: true
-        type:
-          type: string
-          nullable: true
-        biography:
-          type: string
-          nullable: true
-        isni:
-          type: string
-          nullable: true
-        ipi:
-          type: string
-          nullable: true
-        genres:
-          type: array
-          items:
-            type: object
-            properties:
-              root:
-                type: string
-              sub:
-                type: array
-                items:
-                  type: string
     Page:
       type: object
       properties:
@@ -230,6 +193,72 @@ components:
           type: integer
         total:
           type: integer
+    MetricPoint:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        value:
+          type: number
+        platform:
+          type:
+          - string
+          - 'null'
+    Song:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type:
+          - object
+          - 'null'
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration:
+          type:
+          - integer
+          - 'null'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    ArtistResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Artist'
+    MetricSeriesResponse:
+      type: object
+      properties:
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+    StatsResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
     ArtistListResponse:
       type: object
       properties:
@@ -241,86 +270,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
-    ArtistResponse:
+    AlbumListResponse:
       type: object
       properties:
-        object:
-          $ref: '#/components/schemas/Artist'
-    Album:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        type:
-          type: string
-          nullable: true
-        upc:
-          type: string
-          nullable: true
-        releaseDate:
-          type: string
-          format: date-time
-          nullable: true
-        label:
-          type: string
-          nullable: true
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-    Song:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        isrc:
-          type: object
-          nullable: true
-          properties:
-            value:
-              type: string
-            countryCode:
-              type: string
-        creditName:
-          type: string
-          nullable: true
-        releaseDate:
-          type: string
-          format: date-time
-          nullable: true
-        duration:
-          type: integer
-          nullable: true
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-    MetricSeriesResponse:
-      type: object
-      properties:
+        page:
+          $ref: '#/components/schemas/Page'
         related:
           $ref: '#/components/schemas/Related'
         items:
           type: array
           items:
-            $ref: '#/components/schemas/MetricPoint'
+            $ref: '#/components/schemas/Album'
     Related:
       type: object
       properties:
         self:
           type: string
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
     ErrorResponse:
       type: object
       properties:
@@ -346,41 +319,86 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Song'
-    MetricPoint:
+    Album:
       type: object
       properties:
-        date:
+        uuid:
           type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type:
+          - string
+          - 'null'
+        upc:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
           format: date-time
-        value:
-          type: number
-        platform:
-          type: string
-          nullable: true
-    AlbumListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
+        label:
+          type:
+          - string
+          - 'null'
+        artists:
           type: array
           items:
-            $ref: '#/components/schemas/Album'
-    StatsResponse:
+            $ref: '#/components/schemas/Artist'
+    Artist:
       type: object
       properties:
-        object:
-          type: object
-          additionalProperties: true
-  responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        uuid:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        name:
+          type: string
+        appUrl:
+          type: string
+        imageUrl:
+          type:
+          - string
+          - 'null'
+        countryCode:
+          type:
+          - string
+          - 'null'
+        gender:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        biography:
+          type:
+          - string
+          - 'null'
+        isni:
+          type:
+          - string
+          - 'null'
+        ipi:
+          type:
+          - string
+          - 'null'
+        genres:
+          type: array
+          items:
+            type: object
+            properties:
+              root:
+                type: string
+              sub:
+                type: array
+                items:
+                  type: string
   securitySchemes:
     AppId:
       type: apiKey
