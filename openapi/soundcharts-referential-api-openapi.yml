@@ -31,6 +31,15 @@ paths:
                 $ref: '#/components/schemas/GenericListResponse'
 components:
   schemas:
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
     GenericListResponse:
       type: object
       properties:
@@ -43,15 +52,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    Page:
-      type: object
-      properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
     Related:
       type: object
       properties:

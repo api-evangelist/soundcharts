@@ -90,7 +90,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericObjectResponse'
 components:
+  parameters:
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
   schemas:
+    GenericObjectResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
     Song:
       type: object
       properties:
@@ -125,11 +154,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
-    SongResponse:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/Song'
     ErrorResponse:
       type: object
       properties:
@@ -144,12 +168,6 @@ components:
                 type: integer
               message:
                 type: string
-    GenericObjectResponse:
-      type: object
-      properties:
-        object:
-          type: object
-          additionalProperties: true
     Artist:
       type: object
       properties:
@@ -201,6 +219,11 @@ components:
                 type: array
                 items:
                   type: string
+    SongResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Song'
   responses:
     NotFound:
       description: Entity not found
@@ -208,29 +231,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
   securitySchemes:
     AppId:
       type: apiKey

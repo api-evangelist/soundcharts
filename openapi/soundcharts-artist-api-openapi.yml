@@ -137,21 +137,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricSeriesResponse'
 components:
-  responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
     Platform:
       name: platform
       in: path
@@ -159,14 +145,13 @@ components:
       description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
       schema:
         type: string
-    Uuid:
-      name: uuid
+    Identifier:
+      name: identifier
       in: path
       required: true
-      description: Soundcharts entity UUID.
+      description: Platform-specific identifier for the entity.
       schema:
         type: string
-        format: uuid
     Offset:
       name: offset
       in: query
@@ -183,16 +168,28 @@ components:
       schema:
         type: integer
         default: 100
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
   schemas:
-    Page:
+    Related:
       type: object
       properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
+        self:
+          type: string
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
     MetricPoint:
       type: object
       properties:
@@ -239,86 +236,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
-    ArtistResponse:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/Artist'
-    MetricSeriesResponse:
-      type: object
-      properties:
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricPoint'
-    StatsResponse:
-      type: object
-      properties:
-        object:
-          type: object
-          additionalProperties: true
-    ArtistListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-    AlbumListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Album'
-    Related:
-      type: object
-      properties:
-        self:
-          type: string
-        previous:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              code:
-                type: integer
-              message:
-                type: string
-    SongListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Song'
     Album:
       type: object
       properties:
@@ -348,6 +265,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
+    SongListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Song'
     Artist:
       type: object
       properties:
@@ -399,6 +341,64 @@ components:
                 type: array
                 items:
                   type: string
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+    MetricSeriesResponse:
+      type: object
+      properties:
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+    StatsResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
+    ArtistListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    AlbumListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Album'
+    ArtistResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Artist'
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     AppId:
       type: apiKey

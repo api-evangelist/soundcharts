@@ -106,6 +106,30 @@ paths:
                 $ref: '#/components/schemas/RankingResponse'
 components:
   schemas:
+    RankingResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RankingEntry'
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
     Song:
       type: object
       properties:
@@ -140,25 +164,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
-    Chart:
+    ChartListResponse:
       type: object
       properties:
-        slug:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        type:
-          type: string
-        countryCode:
-          type:
-          - string
-          - 'null'
-        frequency:
-          type:
-          - string
-          - 'null'
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chart'
     RankingEntry:
       type: object
       properties:
@@ -174,50 +190,6 @@ components:
           - 'null'
         song:
           $ref: '#/components/schemas/Song'
-    ChartListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chart'
-    Page:
-      type: object
-      properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
-    Related:
-      type: object
-      properties:
-        self:
-          type: string
-        previous:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-    RankingResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RankingEntry'
     Artist:
       type: object
       properties:
@@ -269,22 +241,35 @@ components:
                 type: array
                 items:
                   type: string
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+    Chart:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        type:
+          type: string
+        countryCode:
+          type:
+          - string
+          - 'null'
+        frequency:
+          type:
+          - string
+          - 'null'
   parameters:
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination offset.
-      schema:
-        type: integer
-        default: 0
-    Slug:
-      name: slug
-      in: path
-      required: true
-      description: Chart, radio, or entity slug.
-      schema:
-        type: string
     Platform:
       name: platform
       in: path
@@ -300,6 +285,21 @@ components:
       schema:
         type: integer
         default: 100
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Slug:
+      name: slug
+      in: path
+      required: true
+      description: Chart, radio, or entity slug.
+      schema:
+        type: string
   securitySchemes:
     AppId:
       type: apiKey
