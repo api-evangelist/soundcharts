@@ -90,52 +90,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricSeriesResponse'
 components:
-  parameters:
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the date range (ISO 8601).
-      schema:
-        type: string
-        format: date
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the date range (ISO 8601).
-      schema:
-        type: string
-        format: date
   schemas:
-    Related:
-      type: object
-      properties:
-        self:
-          type: string
-        previous:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
     MetricPoint:
       type: object
       properties:
@@ -157,6 +112,51 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MetricPoint'
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+  parameters:
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the date range (ISO 8601).
+      schema:
+        type: string
+        format: date
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the date range (ISO 8601).
+      schema:
+        type: string
+        format: date
   securitySchemes:
     AppId:
       type: apiKey

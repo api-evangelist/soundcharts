@@ -58,6 +58,18 @@ components:
           items:
             type: object
             additionalProperties: true
+    SearchRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Entity type to search (artist, song, album, playlist).
+        term:
+          type: string
+          description: Search term.
+      required:
+      - type
+      - term
     Related:
       type: object
       properties:
@@ -71,18 +83,6 @@ components:
           type:
           - string
           - 'null'
-    SearchRequest:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Entity type to search (artist, song, album, playlist).
-        term:
-          type: string
-          description: Search term.
-      required:
-      - type
-      - term
   securitySchemes:
     AppId:
       type: apiKey

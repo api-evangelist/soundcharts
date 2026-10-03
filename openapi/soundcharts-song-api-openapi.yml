@@ -90,84 +90,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericObjectResponse'
 components:
-  parameters:
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
   schemas:
-    GenericObjectResponse:
-      type: object
-      properties:
-        object:
-          type: object
-          additionalProperties: true
-    Song:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        isrc:
-          type:
-          - object
-          - 'null'
-          properties:
-            value:
-              type: string
-            countryCode:
-              type: string
-        creditName:
-          type:
-          - string
-          - 'null'
-        releaseDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        duration:
-          type:
-          - integer
-          - 'null'
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              code:
-                type: integer
-              message:
-                type: string
     Artist:
       type: object
       properties:
@@ -219,11 +142,65 @@ components:
                 type: array
                 items:
                   type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
+    GenericObjectResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
     SongResponse:
       type: object
       properties:
         object:
           $ref: '#/components/schemas/Song'
+    Song:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type:
+          - object
+          - 'null'
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration:
+          type:
+          - integer
+          - 'null'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
   responses:
     NotFound:
       description: Entity not found
@@ -231,6 +208,29 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
   securitySchemes:
     AppId:
       type: apiKey

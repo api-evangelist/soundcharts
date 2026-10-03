@@ -106,90 +106,15 @@ paths:
                 $ref: '#/components/schemas/RankingResponse'
 components:
   schemas:
-    RankingResponse:
+    Page:
       type: object
       properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RankingEntry'
-    Related:
-      type: object
-      properties:
-        self:
-          type: string
-        previous:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-    Song:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        isrc:
-          type:
-          - object
-          - 'null'
-          properties:
-            value:
-              type: string
-            countryCode:
-              type: string
-        creditName:
-          type:
-          - string
-          - 'null'
-        releaseDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        duration:
-          type:
-          - integer
-          - 'null'
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-    ChartListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chart'
-    RankingEntry:
-      type: object
-      properties:
-        position:
+        offset:
           type: integer
-        oldPosition:
-          type:
-          - integer
-          - 'null'
-        timeOnChart:
-          type:
-          - integer
-          - 'null'
-        song:
-          $ref: '#/components/schemas/Song'
+        limit:
+          type: integer
+        total:
+          type: integer
     Artist:
       type: object
       properties:
@@ -241,15 +166,66 @@ components:
                 type: array
                 items:
                   type: string
-    Page:
+    RankingEntry:
       type: object
       properties:
-        offset:
+        position:
           type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
+        oldPosition:
+          type:
+          - integer
+          - 'null'
+        timeOnChart:
+          type:
+          - integer
+          - 'null'
+        song:
+          $ref: '#/components/schemas/Song'
+    RankingResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RankingEntry'
+    Song:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type:
+          - object
+          - 'null'
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration:
+          type:
+          - integer
+          - 'null'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
     Chart:
       type: object
       properties:
@@ -269,22 +245,31 @@ components:
           type:
           - string
           - 'null'
+    ChartListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chart'
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
   parameters:
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 100
     Offset:
       name: offset
       in: query
@@ -293,6 +278,21 @@ components:
       schema:
         type: integer
         default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
     Slug:
       name: slug
       in: path

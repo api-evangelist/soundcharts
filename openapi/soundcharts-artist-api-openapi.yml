@@ -137,59 +137,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricSeriesResponse'
 components:
-  parameters:
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination offset.
-      schema:
-        type: integer
-        default: 0
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 100
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    Related:
-      type: object
-      properties:
-        self:
-          type: string
-        previous:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
     MetricPoint:
       type: object
       properties:
@@ -202,84 +157,7 @@ components:
           type:
           - string
           - 'null'
-    Song:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        isrc:
-          type:
-          - object
-          - 'null'
-          properties:
-            value:
-              type: string
-            countryCode:
-              type: string
-        creditName:
-          type:
-          - string
-          - 'null'
-        releaseDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        duration:
-          type:
-          - integer
-          - 'null'
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-    Album:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        type:
-          type:
-          - string
-          - 'null'
-        upc:
-          type:
-          - string
-          - 'null'
-        releaseDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        label:
-          type:
-          - string
-          - 'null'
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              code:
-                type: integer
-              message:
-                type: string
-    SongListResponse:
+    AlbumListResponse:
       type: object
       properties:
         page:
@@ -289,7 +167,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Song'
+            $ref: '#/components/schemas/Album'
     Artist:
       type: object
       properties:
@@ -350,15 +228,6 @@ components:
           type: integer
         total:
           type: integer
-    MetricSeriesResponse:
-      type: object
-      properties:
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricPoint'
     StatsResponse:
       type: object
       properties:
@@ -376,7 +245,68 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
-    AlbumListResponse:
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+    Album:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type:
+          - string
+          - 'null'
+        upc:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        label:
+          type:
+          - string
+          - 'null'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
+    ArtistResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Artist'
+    SongListResponse:
       type: object
       properties:
         page:
@@ -386,19 +316,89 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Album'
-    ArtistResponse:
+            $ref: '#/components/schemas/Song'
+    Song:
       type: object
       properties:
-        object:
-          $ref: '#/components/schemas/Artist'
-  responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type:
+          - object
+          - 'null'
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration:
+          type:
+          - integer
+          - 'null'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    MetricSeriesResponse:
+      type: object
+      properties:
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     AppId:
       type: apiKey
