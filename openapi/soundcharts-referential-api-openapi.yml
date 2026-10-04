@@ -40,18 +40,6 @@ components:
           type: integer
         total:
           type: integer
-    GenericListResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
     Related:
       type: object
       properties:
@@ -65,6 +53,18 @@ components:
           type:
           - string
           - 'null'
+    GenericListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
   securitySchemes:
     AppId:
       type: apiKey

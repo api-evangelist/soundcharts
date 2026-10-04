@@ -90,42 +90,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricSeriesResponse'
 components:
-  schemas:
-    MetricPoint:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
-        value:
-          type: number
-        platform:
-          type:
-          - string
-          - 'null'
-    MetricSeriesResponse:
-      type: object
-      properties:
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricPoint'
-    Related:
-      type: object
-      properties:
-        self:
-          type: string
-        previous:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
   parameters:
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the date range (ISO 8601).
+      schema:
+        type: string
+        format: date
     Uuid:
       name: uuid
       in: path
@@ -142,21 +122,41 @@ components:
       schema:
         type: string
         format: date
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the date range (ISO 8601).
-      schema:
-        type: string
-        format: date
+  schemas:
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+    MetricSeriesResponse:
+      type: object
+      properties:
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+    MetricPoint:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        value:
+          type: number
+        platform:
+          type:
+          - string
+          - 'null'
   securitySchemes:
     AppId:
       type: apiKey

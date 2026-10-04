@@ -91,6 +91,45 @@ paths:
                 $ref: '#/components/schemas/GenericObjectResponse'
 components:
   schemas:
+    SongResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Song'
+    Song:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isrc:
+          type:
+          - object
+          - 'null'
+          properties:
+            value:
+              type: string
+            countryCode:
+              type: string
+        creditName:
+          type:
+          - string
+          - 'null'
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration:
+          type:
+          - integer
+          - 'null'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
     Artist:
       type: object
       properties:
@@ -142,6 +181,12 @@ components:
                 type: array
                 items:
                   type: string
+    GenericObjectResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
     ErrorResponse:
       type: object
       properties:
@@ -156,59 +201,14 @@ components:
                 type: integer
               message:
                 type: string
-    GenericObjectResponse:
-      type: object
-      properties:
-        object:
-          type: object
-          additionalProperties: true
-    SongResponse:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/Song'
-    Song:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        isrc:
-          type:
-          - object
-          - 'null'
-          properties:
-            value:
-              type: string
-            countryCode:
-              type: string
-        creditName:
-          type:
-          - string
-          - 'null'
-        releaseDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        duration:
-          type:
-          - integer
-          - 'null'
-        artists:
-          type: array
-          items:
-            $ref: '#/components/schemas/Artist'
-  responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
     Identifier:
       name: identifier
       in: path
@@ -224,13 +224,13 @@ components:
       schema:
         type: string
         format: uuid
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     AppId:
       type: apiKey

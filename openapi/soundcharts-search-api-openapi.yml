@@ -46,6 +46,19 @@ components:
           type: integer
         total:
           type: integer
+    Related:
+      type: object
+      properties:
+        self:
+          type: string
+        previous:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
     GenericListResponse:
       type: object
       properties:
@@ -70,19 +83,6 @@ components:
       required:
       - type
       - term
-    Related:
-      type: object
-      properties:
-        self:
-          type: string
-        previous:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     AppId:
       type: apiKey
