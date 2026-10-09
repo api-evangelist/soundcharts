@@ -1,19 +1,60 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/soundcharts-openapi.yml
+source: openapi/soundcharts-album-api-openapi.yml, openapi/soundcharts-artist-api-openapi.yml,
+  openapi/soundcharts-chart-api-openapi.yml, openapi/soundcharts-metrics-api-openapi.yml, openapi/soundcharts-playlist-api-openapi.yml,
+  openapi/soundcharts-radio-api-openapi.yml, openapi/soundcharts-referential-api-openapi.yml,
+  openapi/soundcharts-search-api-openapi.yml, openapi/soundcharts-song-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 32
   by_action_class:
-    connected: 31
-    acting: 1
+    connected: 32
   by_consequence:
-    read: 31
-    write: 1
+    read: 32
   human_in_the_loop_required: 0
 operations:
+- path: /api/v2/album/by-uuid/{uuid}
+  method: get
+  operationId: getAlbumMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/album/by-upc/{upc}
+  method: get
+  operationId: getAlbumByUpc
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/album/by-platform/{platform}/{identifier}
+  method: get
+  operationId: getAlbumByPlatformId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2.26/album/{uuid}/tracks
+  method: get
+  operationId: getAlbumTracks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v2/artist/{uuid}
   method: get
   operationId: getArtistMetadata
@@ -84,126 +125,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/v2/song/{uuid}
-  method: get
-  operationId: getSongMetadata
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/song/by-isrc/{isrc}
-  method: get
-  operationId: getSongByIsrc
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/song/by-platform/{platform}/{identifier}
-  method: get
-  operationId: getSongByPlatformId
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/song/{uuid}/audio-features
-  method: get
-  operationId: getSongAudioFeatures
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/song/{uuid}/audience/{platform}
-  method: get
-  operationId: getSongAudience
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/album/by-uuid/{uuid}
-  method: get
-  operationId: getAlbumMetadata
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/album/by-upc/{upc}
-  method: get
-  operationId: getAlbumByUpc
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/album/by-platform/{platform}/{identifier}
-  method: get
-  operationId: getAlbumByPlatformId
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2.26/album/{uuid}/tracks
-  method: get
-  operationId: getAlbumTracks
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/playlist/{uuid}
-  method: get
-  operationId: getPlaylistMetadata
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/playlist/by-platform/{platform}/{identifier}
-  method: get
-  operationId: getPlaylistByPlatformId
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/playlist/{uuid}/tracks
-  method: get
-  operationId: getPlaylistTracks
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/v2/chart/song/by-platform/{platform}
   method: get
   operationId: getSongChartsByPlatform
@@ -254,6 +175,16 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/v2/song/{uuid}/audience/{platform}
+  method: get
+  operationId: getSongAudience
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v2/artist/{uuid}/audience/{platform}
   method: get
   operationId: getArtistAudience
@@ -277,6 +208,36 @@ operations:
 - path: /api/v2/artist/{uuid}/popularity/{platform}
   method: get
   operationId: getArtistPopularity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/playlist/{uuid}
+  method: get
+  operationId: getPlaylistMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/playlist/by-platform/{platform}/{identifier}
+  method: get
+  operationId: getPlaylistByPlatformId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/playlist/{uuid}/tracks
+  method: get
+  operationId: getPlaylistTracks
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -314,25 +275,59 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/v2/referential/platforms
+  method: get
+  operationId: getPlatforms
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v2/search
   method: post
   operationId: search
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2/referential/platforms
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/song/{uuid}
   method: get
-  operationId: getPlatforms
+  operationId: getSongMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/song/by-isrc/{isrc}
+  method: get
+  operationId: getSongByIsrc
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/song/by-platform/{platform}/{identifier}
+  method: get
+  operationId: getSongByPlatformId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/song/{uuid}/audio-features
+  method: get
+  operationId: getSongAudioFeatures
   x-agentic-access:
     action-class: connected
     consequence: read
