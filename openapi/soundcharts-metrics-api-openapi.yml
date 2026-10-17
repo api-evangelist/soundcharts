@@ -91,18 +91,11 @@ paths:
                 $ref: '#/components/schemas/MetricSeriesResponse'
 components:
   parameters:
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    StartDate:
-      name: startDate
+    EndDate:
+      name: endDate
       in: query
       required: false
-      description: Start of the date range (ISO 8601).
+      description: End of the date range (ISO 8601).
       schema:
         type: string
         format: date
@@ -114,14 +107,21 @@ components:
       schema:
         type: string
         format: uuid
-    EndDate:
-      name: endDate
+    StartDate:
+      name: startDate
       in: query
       required: false
-      description: End of the date range (ISO 8601).
+      description: Start of the date range (ISO 8601).
       schema:
         type: string
         format: date
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
   schemas:
     Related:
       type: object
@@ -136,15 +136,6 @@ components:
           type:
           - string
           - 'null'
-    MetricSeriesResponse:
-      type: object
-      properties:
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricPoint'
     MetricPoint:
       type: object
       properties:
@@ -157,6 +148,15 @@ components:
           type:
           - string
           - 'null'
+    MetricSeriesResponse:
+      type: object
+      properties:
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
   securitySchemes:
     AppId:
       type: apiKey

@@ -69,45 +69,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/SongListResponse'
 components:
-  parameters:
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination offset.
-      schema:
-        type: integer
-        default: 0
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 100
   schemas:
     Related:
       type: object
@@ -122,6 +83,11 @@ components:
           type:
           - string
           - 'null'
+    PlaylistResponse:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Playlist'
     Song:
       type: object
       properties:
@@ -167,6 +133,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Song'
+    Playlist:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        platform:
+          type: string
+        type:
+          type:
+          - string
+          - 'null'
+        curator:
+          type:
+          - string
+          - 'null'
+        latestSubscriberCount:
+          type:
+          - integer
+          - 'null'
+        latestTrackCount:
+          type:
+          - integer
+          - 'null'
     Artist:
       type: object
       properties:
@@ -218,46 +210,6 @@ components:
                 type: array
                 items:
                   type: string
-    Page:
-      type: object
-      properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
-    PlaylistResponse:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/Playlist'
-    Playlist:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        platform:
-          type: string
-        type:
-          type:
-          - string
-          - 'null'
-        curator:
-          type:
-          - string
-          - 'null'
-        latestSubscriberCount:
-          type:
-          - integer
-          - 'null'
-        latestTrackCount:
-          type:
-          - integer
-          - 'null'
     ErrorResponse:
       type: object
       properties:
@@ -272,6 +224,54 @@ components:
                 type: integer
               message:
                 type: string
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
   responses:
     NotFound:
       description: Entity not found

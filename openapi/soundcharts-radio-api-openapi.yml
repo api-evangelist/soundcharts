@@ -68,38 +68,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericListResponse'
 components:
-  parameters:
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination offset.
-      schema:
-        type: integer
-        default: 0
-    Slug:
-      name: slug
-      in: path
-      required: true
-      description: Chart, radio, or entity slug.
-      schema:
-        type: string
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      description: Soundcharts entity UUID.
-      schema:
-        type: string
-        format: uuid
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 100
   schemas:
     Related:
       type: object
@@ -114,15 +82,20 @@ components:
           type:
           - string
           - 'null'
-    Page:
+    ErrorResponse:
       type: object
       properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
     GenericListResponse:
       type: object
       properties:
@@ -141,20 +114,47 @@ components:
         object:
           type: object
           additionalProperties: true
-    ErrorResponse:
+    Page:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              code:
-                type: integer
-              message:
-                type: string
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      description: Soundcharts entity UUID.
+      schema:
+        type: string
+        format: uuid
+    Slug:
+      name: slug
+      in: path
+      required: true
+      description: Chart, radio, or entity slug.
+      schema:
+        type: string
   responses:
     NotFound:
       description: Entity not found

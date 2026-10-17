@@ -105,38 +105,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/RankingResponse'
 components:
-  parameters:
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination offset.
-      schema:
-        type: integer
-        default: 0
-    Slug:
-      name: slug
-      in: path
-      required: true
-      description: Chart, radio, or entity slug.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 100
   schemas:
+    RankingEntry:
+      type: object
+      properties:
+        position:
+          type: integer
+        oldPosition:
+          type:
+          - integer
+          - 'null'
+        timeOnChart:
+          type:
+          - integer
+          - 'null'
+        song:
+          $ref: '#/components/schemas/Song'
     Related:
       type: object
       properties:
@@ -150,7 +134,26 @@ components:
           type:
           - string
           - 'null'
-    ChartListResponse:
+    Chart:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        type:
+          type: string
+        countryCode:
+          type:
+          - string
+          - 'null'
+        frequency:
+          type:
+          - string
+          - 'null'
+    RankingResponse:
       type: object
       properties:
         page:
@@ -160,7 +163,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Chart'
+            $ref: '#/components/schemas/RankingEntry'
     Song:
       type: object
       properties:
@@ -195,25 +198,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
-    Chart:
-      type: object
-      properties:
-        slug:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        type:
-          type: string
-        countryCode:
-          type:
-          - string
-          - 'null'
-        frequency:
-          type:
-          - string
-          - 'null'
     Artist:
       type: object
       properties:
@@ -265,31 +249,7 @@ components:
                 type: array
                 items:
                   type: string
-    Page:
-      type: object
-      properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
-    RankingEntry:
-      type: object
-      properties:
-        position:
-          type: integer
-        oldPosition:
-          type:
-          - integer
-          - 'null'
-        timeOnChart:
-          type:
-          - integer
-          - 'null'
-        song:
-          $ref: '#/components/schemas/Song'
-    RankingResponse:
+    ChartListResponse:
       type: object
       properties:
         page:
@@ -299,7 +259,47 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/RankingEntry'
+            $ref: '#/components/schemas/Chart'
+    Page:
+      type: object
+      properties:
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination offset.
+      schema:
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 100
+    Slug:
+      name: slug
+      in: path
+      required: true
+      description: Chart, radio, or entity slug.
+      schema:
+        type: string
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
   securitySchemes:
     AppId:
       type: apiKey

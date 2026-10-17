@@ -181,12 +181,6 @@ components:
                 type: array
                 items:
                   type: string
-    GenericObjectResponse:
-      type: object
-      properties:
-        object:
-          type: object
-          additionalProperties: true
     ErrorResponse:
       type: object
       properties:
@@ -201,21 +195,13 @@ components:
                 type: integer
               message:
                 type: string
+    GenericObjectResponse:
+      type: object
+      properties:
+        object:
+          type: object
+          additionalProperties: true
   parameters:
-    Platform:
-      name: platform
-      in: path
-      required: true
-      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
-      schema:
-        type: string
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Platform-specific identifier for the entity.
-      schema:
-        type: string
     Uuid:
       name: uuid
       in: path
@@ -224,6 +210,20 @@ components:
       schema:
         type: string
         format: uuid
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Platform-specific identifier for the entity.
+      schema:
+        type: string
+    Platform:
+      name: platform
+      in: path
+      required: true
+      description: Platform slug (e.g. spotify, apple-music, youtube, instagram, tiktok).
+      schema:
+        type: string
   responses:
     NotFound:
       description: Entity not found

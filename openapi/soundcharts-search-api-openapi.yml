@@ -37,15 +37,6 @@ paths:
                 $ref: '#/components/schemas/GenericListResponse'
 components:
   schemas:
-    Page:
-      type: object
-      properties:
-        offset:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
     Related:
       type: object
       properties:
@@ -59,18 +50,15 @@ components:
           type:
           - string
           - 'null'
-    GenericListResponse:
+    Page:
       type: object
       properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        related:
-          $ref: '#/components/schemas/Related'
-        items:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
     SearchRequest:
       type: object
       properties:
@@ -83,6 +71,18 @@ components:
       required:
       - type
       - term
+    GenericListResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        related:
+          $ref: '#/components/schemas/Related'
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
   securitySchemes:
     AppId:
       type: apiKey
